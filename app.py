@@ -8,6 +8,8 @@ from pymongo import MongoClient
 client = MongoClient('mongodb+srv://test:sparta@cluster0.htt7q.mongodb.net/myFirstDatabase?retryWrites=true&w=majority')
 db = client.dbsparta
 
+
+
 @app.route('/')
 def home():
     return render_template('index.html')
