@@ -7,6 +7,9 @@ from werkzeug.utils import secure_filename
 from datetime import datetime, timedelta
 
 
+clients = MongoClient('mongodb+srv://test:sparta@cluster0.htt7q.mongodb.net/myFirstDatabase?retryWrites=true&w=majority')
+dbs = clients.dbsparta
+
 app = Flask(__name__)
 app.config["TEMPLATES_AUTO_RELOAD"] = True
 app.config['UPLOAD_FOLDER'] = "./static/profile_pics"
@@ -28,6 +31,11 @@ def home():
         return redirect(url_for("login", msg="로그인 시간이 만료되었습니다."))
     except jwt.exceptions.DecodeError:
         return redirect(url_for("login", msg="로그인 정보가 존재하지 않습니다."))
+
+@app.route('/index')
+def index():
+    return render_template('index.html')
+
 
 @app.route('/login')
 def login():
@@ -74,6 +82,12 @@ def check_dup():
     exists = bool(db.users.find_one({"username": username_receive}))
     return jsonify({'result': 'success', 'exists': exists})
 
+@app.route("/index", methods=["POST"])
+def post():
+    num_receive = request.form['num_give']
+    # 여러개 찾기 - 예시 ( _id 값은 제외하고 출력)
+    videos = list(dbs.youtube.find({'num':int(num_receive)}, {'_id': False}))
+    return jsonify({'msg':'저장완료!','video':videos})
 
 if __name__ == '__main__':
     app.run('0.0.0.0', port=5000, debug=True)
