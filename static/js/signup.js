@@ -1,6 +1,6 @@
 // 아이디, 비밀번호 정규표현식
-function is_email(asValue) {
-    var regExp = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/;
+function is_username(asValue) {
+    var regExp = /^(?=.*[a-zA-Z])[-a-zA-Z0-9_.]{2,10}$/;
     return regExp.test(asValue);
 }
 
@@ -11,16 +11,16 @@ function is_password(asValue) {
 
 // 아이디 중복확인
 function check_dup() {
-    let useremail = $("#input-email").val()
-    console.log(useremail)
-    if (useremail == "") {
-        $("#help-id").text("이메일을 입력해주세요.").removeClass("is-safe").addClass("is-danger")
-        $("#input-email").focus()
+    let username = $("#input-username").val()
+    console.log(username)
+    if (username == "") {
+        $("#help-id").text("아이디를 입력해주세요.").removeClass("is-safe").addClass("is-danger")
+        $("#input-username").focus()
         return;
     }
-    if (!is_email(useremail)) {
-        $("#help-id").text("이메일의 형식을 확인해주세요. 영문과 숫자, 일부 특수문자(._-) 사용 가능. 2-20자 길이").removeClass("is-safe").addClass("is-danger")
-        $("#input-email").focus()
+    if (!is_username(username)) {
+        $("#help-id").text("아이디의 형식을 확인해주세요.").removeClass("is-safe").addClass("is-danger")
+        $("#input-username").focus()
         return;
     }
 
@@ -29,15 +29,15 @@ function check_dup() {
         type: "POST",
         url: "/sign_up/check_dup",
         data: {
-            useremail_give: useremail
+            username_give: username
         },
         success: function (response) {
 
             if (response["exists"]) {
-                $("#help-id").text("이미 존재하는 이메일입니다.").removeClass("is-safe").addClass("is-danger")
-                $("#input-email").focus()
+                $("#help-id").text("이미 존재하는 아이디입니다.").removeClass("is-safe").addClass("is-danger")
+                $("#input-username").focus()
             } else {
-                $("#help-id").text("사용할 수 있는 이메일입니다.").removeClass("is-danger").addClass("is-success")
+                $("#help-id").text("사용할 수 있는 아이디입니다.").removeClass("is-danger").addClass("is-success")
             }
             $("#help-id").removeClass("is-loading")
 
@@ -47,10 +47,10 @@ function check_dup() {
 
 // 회원가입
 function sign_up() {
-    let useremail = $("#input-email").val()
+    let username = $("#input-username").val()
     let password = $("#input-password").val()
     let password2 = $("#input-password2").val()
-    console.log(useremail, password, password2)
+    console.log(username, password, password2)
 
     // 아이디 중복검사 끝났는 지 확인
     if ($("#help-id").hasClass("is-danger")) {
@@ -90,7 +90,7 @@ function sign_up() {
         type: "POST",
         url: "/sign_up/save",
         data: {
-            useremail_give: useremail,
+            username_give: username,
             password_give: password
         },
         success: function (response) {
