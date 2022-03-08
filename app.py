@@ -36,24 +36,27 @@ def home():
 def index():
     return render_template('index.html')
 
-
 @app.route('/login')
 def login():
     msg = request.args.get("msg")
     return render_template('login.html', msg=msg)
 
+@app.route('/signup')
+def signup():
+    return render_template('signup.html')
+
 @app.route('/sign_in', methods=['POST'])
 def sign_in():
     # 로그인
-    username_receive = request.form['username_give']
+    useremail_receive = request.form['useremail_give']
     password_receive = request.form['password_give']
 
     pw_hash = hashlib.sha256(password_receive.encode('utf-8')).hexdigest()
-    result = db.users.find_one({'username': username_receive, 'password': pw_hash})
+    result = db.users.find_one({'useremail': useremail_receive, 'password': pw_hash})
 
     if result is not None:
         payload = {
-         'id': username_receive,
+         'id': useremail_receive,
          'exp': datetime.utcnow() + timedelta(seconds=60 * 60 * 24)  # 로그인 24시간 유지
         }
         token = jwt.encode(payload, SECRET_KEY, algorithm='HS256').decode('utf-8')
@@ -65,12 +68,12 @@ def sign_in():
 
 @app.route('/sign_up/save', methods=['POST'])
 def sign_up():
-    username_receive = request.form['username_give']
+    useremail_receive = request.form['useremail_give']
     password_receive = request.form['password_give']
     password_hash = hashlib.sha256(password_receive.encode('utf-8')).hexdigest()
 
     doc = {
-        "username": username_receive,
+        "useremail": useremail_receive,
         "password": password_hash
     }
     db.users.insert_one(doc)
@@ -78,8 +81,8 @@ def sign_up():
 
 @app.route('/sign_up/check_dup', methods=['POST'])
 def check_dup():
-    username_receive = request.form['username_give']
-    exists = bool(db.users.find_one({"username": username_receive}))
+    useremail_receive = request.form['useremail_give']
+    exists = bool(db.users.find_one({"useremail": useremail_receive}))
     return jsonify({'result': 'success', 'exists': exists})
 
 @app.route("/index", methods=["POST"])
