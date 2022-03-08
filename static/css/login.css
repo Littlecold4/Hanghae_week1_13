@@ -1,40 +1,181 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 body {
-    background-color: RGBA(232, 52, 78, 0.2);
-    min-height: 100vh;
+    font-family: "Poppins", sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
 }
 
-.section {
-    padding: 1rem 1.5rem;
-    max-width: 750px;
-    margin: auto;
+/* 컨테이너 영역 */
+
+.container {
+    width: 400px;
+    height: 60%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    border-radius: 10px;
+    background-color: white;
+    box-shadow: 0 20px 20px rgba(0, 0, 0, 0.2), 0px 0px 50px rgba(0, 0, 0, 0.2);
+
+    position: relative;
 }
 
-.title {
-    font-weight: 800;
-    font-size: 5rem;
+/* 컨테이너 영역 끝 */
+
+/* 이미지 영역 */
+
+.img-box {
+    width: 80%;
+    height: 25%;
+    padding-top: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-.subtitle {
-    font-size: 2rem;
-    font-family: 'Dongle', sans-serif;
+.img-box img {
+    width: 250px;
 }
 
-.is-sparta {
-    color: #e8344e !important;
+/* 이미지 영역 끝 */
+
+/* 로그인 영역 */
+
+.login-box {
+    width: 80%;
+    height: 45%;
+    padding-top: 20px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
 }
 
-.button.is-sparta {
-    background-color: #e8344e;
-    border-color: transparent;
-    color: #fff !important;
+.int-area {
+    width: 100%;
+    position: relative;
 }
 
-.button.is-sparta.is-outlined {
-    background-color: transparent;
-    border-color: #e8344e;
-    color: #e8344e !important;
+.int-area > input {
+    width: 100%;
+    padding: 20px 10px 8px 10px;
+    background-color: rgb(250, 248, 245);
+    font-size: 20px;
+
+    outline: none;
+    border: 1px solid #999;
 }
 
-.help {
-    color: gray;
+.int-area > input:hover {
+    border: 1px gray solid;
+}
+
+.int-area > label {
+    position: absolute;
+    top: 25px;
+    left: 10px;
+    color: rgb(73, 73, 73);
+    transition: top .5s ease;
+}
+
+.int-area > input:focus + label,
+.int-area > input:valid + label {
+    top: 15px;
+    font-size: 13px;
+}
+
+.int-area > input {
+    margin-top: 10px;
+}
+
+
+
+.btn-area {
+    width: 100%;
+}
+
+.btn-area > input {
+    margin-top: 20px;
+    background-color: rgb(140, 221, 248);
+    color: white;
+    font-size: 1rem;
+    height: 35px;
+    border: none;
+    border-radius: 15px;
+    cursor: pointer;
+    width: 100%;
+}
+
+.btn-area > input:hover {
+    background-color: rgb(74, 201, 243);
+}
+
+/* 로그인 영역 끝 */
+
+/* 회원가입 페이지 이동 영역 */
+
+.signup-box {
+    padding-top: 35px;
+    width: 80%;
+    height: 20%;
+    /* border: 1px rgb(165, 59, 103) solid; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.signup-box > div {
+    margin-right: 5px;
+}
+
+.signup-box > a {
+    text-decoration: none;
+    color: rgb(53, 185, 247);
+    font-weight: 700;
+}
+
+.signup-box > a:hover {
+    color: rgb(7, 171, 247);
+}
+
+/* 회원가입 페이지 이동 영역 끝 */
+
+/* 구분선 */
+
+.division-line {
+    position: absolute;
+    bottom: 110px;
+    width: 80%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.division-line > .line {
+    width: 120px;
+    height: 1px;
+    background-color: rgb(173, 173, 173, .4);
+}
+
+.division-line > .or {
+    font-weight: bold;
+    color: rgb(94, 93, 93);
+}
+
+.is-success {
+    font-size: 0.8rem;
+    color: blue;
+}
+
+.is-danger {
+    font-size: 0.8rem;
+    color: red;
 }
