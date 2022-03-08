@@ -37,11 +37,15 @@ def home():
 def index():
     return render_template('index.html')
 
-
 @app.route('/login')
 def login():
     msg = request.args.get("msg")
     return render_template('login.html', msg=msg)
+
+
+@app.route('/signup')
+def signup():
+    return render_template('signup.html')
 
 
 @app.route('/sign_in', methods=['POST'])
@@ -51,12 +55,14 @@ def sign_in():
     password_receive = request.form['password_give']
 
     pw_hash = hashlib.sha256(password_receive.encode('utf-8')).hexdigest()
+
     result = dbs.users.find_one({'username': username_receive, 'password': pw_hash})
 
     if result is not None:
         payload = {
             'id': username_receive,
             'exp': datetime.utcnow() + timedelta(seconds=60 * 60 * 24)  # 로그인 24시간 유지
+
         }
         token = jwt.encode(payload, SECRET_KEY, algorithm='HS256')
 

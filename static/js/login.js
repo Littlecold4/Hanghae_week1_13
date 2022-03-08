@@ -2,7 +2,7 @@
 //     alert("{{ msg }}")
 // {% endif %}
 
-// 회원가입 클릭 시 class 추가 및 삭제
+
 function toggle_sign_up() {
     $("#sign-up-box").toggleClass("is-hidden")
     $("#div-sign-in-or-up").toggleClass("is-hidden")
@@ -17,7 +17,6 @@ function sign_in() {
     let username = $("#input-username").val()
     let password = $("#input-password").val()
 
-    console.log('11')
     if (username == "") {
         $("#help-id-login").text("아이디를 입력해주세요.")
         $("#input-username").focus()
@@ -156,4 +155,3 @@ function check_dup() {
         }
     });
 }
-

@@ -1,10 +1,66 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+     <!-- Webpage Title -->
+    <title>Sign Up | 내 몸 처방전</title>
+
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&display=swap" rel="stylesheet">
+
+    <!-- Bulma CSS -->
+{#    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">#}
+    <!-- Font Awesome CSS -->
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <!-- CSS Link -->
+    <link href="{{ url_for('static', filename='css/signup.css') }}" rel="stylesheet">
+    <!-- JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
+    <!-- JS Link -->
+    <script src="{{ url_for('static', filename='js/signup.js') }}"></script>
+
 </head>
 <body>
+    <div class="container">
+        <div class="img-box">
+            <img src="{{ url_for('static', filename='img/logo.png') }}" alt="웹 로고">
 
+        </div>
+
+        <div class="signup_box">
+            <div class="int-area">
+                <input id="input-username" type="text" aria-label="아이디" aria-required="true" autocapitalize="off" autocorrect="off" maxlength="20" required>
+                <label>ID</label>
+                <button class="check-dup-button" onclick="check_dup()">중복확인</button>
+            </div>
+            <p id="help-id" class="help"></p>
+
+            <div class="int-area">
+                <input id="input-password" type="password" aria-label="비밀번호" autocomplete="off" required>
+                <label>PW</label>
+            </div>
+            <p id="help-password" class="help"></p>
+
+            <div class="int-area">
+                <input id="input-password2" type="password" aria-label="비밀번호 확인" autocomplete="off" required>
+                <label>PW CHECK</label>
+            </div>
+            <p id="help-password2" class="help"></p>
+
+
+            <input class="signup-btn" onclick="sign_up()" aria-label="가입하기" aria-required="true" autocapitalize="off" autocorrect="off" type="submit" value="가입하기">
+
+            <div class="return">
+            <div>계정이 있으신가요?</div>
+            <a href="{{url_for('login')}}">로그인</a>
+            </div>
+
+        </div>
+
+
+    </div>
 </body>
 </html>
