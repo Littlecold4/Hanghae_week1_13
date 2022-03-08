@@ -20,7 +20,7 @@ function posting(num) {
     $('#list').empty()
     $.ajax({
         type: 'POST',
-        url: '/health',
+        url: '/index',
         data: {num_give: num},
         success: function (response) {
             console.log(response['video'])
