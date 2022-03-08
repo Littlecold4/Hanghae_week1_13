@@ -35,6 +35,18 @@ def login():
     msg = request.args.get("msg")
     return render_template('login.html', msg=msg)
 
+@app.route('/sign_up/save', methods=['POST'])
+def sign_up():
+    username_receive = request.form['username_give']
+    password_receive = request.form['password_give']
+    password_hash = hashlib.sha256(password_receive.encode('utf-8')).hexdigest()
+
+    doc = {
+        "username": username_receive,
+        "password": password_hash
+    }
+    db.users.insert_one(doc)
+    return jsonify({'result': 'success'})
 
 @app.route('/sign_up/check_dup', methods=['POST'])
 def check_dup():
