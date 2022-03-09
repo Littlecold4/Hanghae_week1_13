@@ -46,6 +46,7 @@ function toggle_favorite(video_id, type) {
     // console.log(video_id, type)
     let $a_like = $(`#${video_id} a[aria-label='favorite']`)
     let $i_like = $a_like.find("i")
+    console.log($i_like)
 
     // console.log($i_like)
     if ($i_like.hasClass("fa-star-o")) {
@@ -87,9 +88,25 @@ function remove() {
     $('#list').empty()
 }
 
+
 function posting(num) {
-    $('#list').empty()
-    $.ajax({
+    let btn_num = 'btn'+num
+    // let $a_like = $(`#${btn_num}`)
+    // console.log($a_like)
+    // console.log(btn_num)
+    let a= "human-btn "+btn_num
+    if(document.getElementById(btn_num).className==a) {
+        console.log(num)
+        document.getElementById(btn_num).className = 'human-btn-click ' + btn_num
+        for(let i=1; i<=9;i++){
+            if(i !=num){
+                let btn_num = 'btn'+i
+                let a ='human-btn ' +'btn'+i
+                document.getElementById(btn_num).className =a
+            }
+        }
+        $('#list').empty()
+        $.ajax({
         type: 'POST',
         url: '/index',
         data: {num_give: num},
@@ -122,19 +139,18 @@ function posting(num) {
                 }
 
                 let temp_html = `
-                                <div class="card border-primary mb-3" id="${row["_id"]}" style="max-width: 20rem;" >
+                                <div class="card" id="${row["_id"]}" style="max-width: 15rem; outline: #20c997 10px" >
                                   <div class="card-header">${name}</div>
                                   <img src="${img}" class="mypic">
                                   <div class="card-body">
                                     <h4 class="card-title">${title}</h4>
-                                    <p class="card-text">Go for show</p>
                                     <a href="http://www.youtube.com${url}">보러가기</a>
                                   </div>
                                       <nav class="level is-mobile">
                                             <div class="level-left">
-                                                <a class="level-item is-sparta" aria-label="heart" onclick="toggle_like('${row["_id"]}','heart')">
+                                                <a style="text-decoration: none" class="level-item is-sparta" aria-label="heart" onclick="toggle_like('${row["_id"]}','heart')">
                                                     <span class="icon is-small"><i class="fa ${class_heart}" aria-hidden="true" style="color: red"></i></span>&nbsp;<span class="like-num">${count}</span>
-                                                <a class="level-item is-sparta" aria-label="favorite" onclick="toggle_favorite('${row["_id"]}','favorite')">
+                                                <a style="text-decoration:none " class="level-item is-sparta" aria-label="favorite" onclick="toggle_favorite('${row["_id"]}','favorite')">
                                                     <span class="icon is-small"><i class="fa ${class_favorite}" aria-hidden="true" style="color: yellow"></i></span>&nbsp;
                                                 </a>
                                             </div>
@@ -145,6 +161,11 @@ function posting(num) {
             }
         }
     });
+    }else{
+        document.getElementById(btn_num).className = 'human-btn '+btn_num
+        $('#list').empty()
+    }
+
 }
 
 
