@@ -80,3 +80,9 @@
 .card-title{
     font-size : 20px
 }
+.level-item > fa{
+    color: red;
+}
+.fa star{
+    color : yellow;
+}
