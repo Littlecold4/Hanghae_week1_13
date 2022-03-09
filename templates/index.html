@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="/static/css/index.css">
 
 
+
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
     <!-- Font Awesome CSS -->
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
@@ -26,6 +27,7 @@
 </head>
 
 <body>
+<<<<<<< HEAD
 
 <h1>mybody</h1>
 <button class="btn" id="btn1" onclick ="posting(1)">head</button>
@@ -40,6 +42,97 @@
 <button class="btn" id="btn10" onclick ="remove()">지우기</button>
 <div id="list">
 
+=======
+<!--<div class="card border-primary mb-3" id="hi" style="max-width: 20rem;">-->
+<!--    <div class="card-header">gd</div>-->
+<!--    <img src="${img}" class="mypic">-->
+<!--    <div class="card-body">-->
+<!--        <h4 class="card-title">gd}</h4>-->
+<!--        <p class="card-text">Go for show</p>-->
+<!--        <a href="http://www.youtube.com${url}">보러가기</a>-->
+<!--    </div>-->
+<!--    <nav class="level is-mobile">-->
+<!--        <div class="level-left">-->
+<!--            <a class="level-item is-sparta" aria-label="heart" onclick="toggle_like('gd','heart')">-->
+<!--                <span class="icon is-small"><i class="fa ${class_heart}" aria-hidden="true"></i></span>&nbsp;<span-->
+<!--                    class="like-num">2.7k</span>-->
+<!--            </a>-->
+<!--        </div>-->
+<!--    </nav>-->
+<!--</div>-->
+<!--`-->
+
+<header>
+    <nav class="navbar" role="navigation" aria-label="main navigation">
+        <div class="navbar-brand">
+            <img src="{{ url_for('static', filename='img/logo.png') }}" alt="웹 로고" width="112", height="15" onclick="window.location.href='/'">
+            <h1 onclick="window.location.href='/'">내몸 처방전</h1>
+        </div>
+
+        <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+        </a>
+        </div>
+
+        <div class="navbar-end">
+            <div class="navbar-item">
+                <div class="buttons">
+                    <a class="button is-primary">
+                        <strong>log out</strong>
+                    </a>
+                    <a class="button is-light" href="/favorite">
+                        MY PAGE
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+</header>
+<aside class="menu">
+    <h6 class="menu-title">
+        부위별 영상
+    </h6>
+    <ul class="menu-list">
+        <li>
+            <button class="button is-primary" id="btn1" onclick="posting(1)">머리</button>
+        </li>
+        <li>
+            <button class="button is-primary" id="btn2" onclick="posting(2)">목</button>
+        </li>
+        <li>
+            <button class="button is-primary" id="btn3" onclick="posting(3)">등</button>
+        </li>
+        <li>
+            <button class="button is-primary" id="btn4" onclick="posting(4)">어깨</button>
+        </li>
+        <li>
+            <button class="button is-primary" id="btn5" onclick="posting(5)">허리</button>
+        </li>
+        <li>
+            <button class="button is-primary" id="btn6" onclick="posting(6)">골반</button>
+        </li>
+        <li>
+            <button class="button is-primary" id="btn7" onclick="posting(7)">허벅지</button>
+        </li>
+        <li>
+            <button class="button is-primary" id="btn8" onclick="posting(8)">무릎</button>
+        </li>
+        <li>
+            <button class="button is-primary" id="btn9" onclick="posting(9)">종아리</button>
+        </li>
+        <li>
+            <button class="button is-primary" id="btn10" onclick="$('#cards-box').empty()">지우기</button>
+        </li>
+    </ul>
+</aside>
+
+<section class="content">
+    <div id="list" class="row row-cols-1 row-cols-md-4 g-4"></div>
+</section>
+
+>>>>>>> 800de43d665d45107da65bdea7a0b5d9d6f34028
 </body>
 
 </html>

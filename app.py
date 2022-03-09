@@ -5,6 +5,10 @@ import hashlib
 from flask import Flask, render_template, jsonify, request, redirect, url_for
 from werkzeug.utils import secure_filename
 from datetime import datetime, timedelta
+from bson import ObjectId
+from flask import session
+import json
+from bson import json_util
 
 clients = MongoClient(
     'mongodb+srv://test:sparta@cluster0.htt7q.mongodb.net/myFirstDatabase?retryWrites=true&w=majority')
@@ -33,19 +37,24 @@ def home():
         return redirect(url_for("login", msg="로그인 정보가 존재하지 않습니다."))
 
 
-@app.route('/index')
-def index():
-    return render_template('index.html')
 
 @app.route('/login')
 def login():
     msg = request.args.get("msg")
     return render_template('login.html', msg=msg)
 
+@app.route('/logout')
+def logout():
+    return redirect
 
 @app.route('/signup')
 def signup():
     return render_template('signup.html')
+
+@app.route('/favorite')
+def favorite():
+    return render_template('favorite.html')
+
 
 
 @app.route('/sign_in', methods=['POST'])
@@ -61,8 +70,7 @@ def sign_in():
     if result is not None:
         payload = {
             'id': username_receive,
-            'exp': datetime.utcnow() + timedelta(seconds=60 * 60 * 24)  # 로그인 24시간 유지
-
+            'exp': datetime.utcnow() + timedelta(seconds=60 * 60)  # 로그인 24시간 유지
         }
         token = jwt.encode(payload, SECRET_KEY, algorithm='HS256').decode('utf-8')
 
@@ -107,7 +115,30 @@ def post():
             video["_id"] = str(video["_id"])
             video["count_heart"] = dbs.likes.count_documents({"video_id": video["_id"], "type": "heart"})
             video["heart_by_me"] = bool(dbs.likes.find_one({"video_id": video["_id"], "type": "heart", "username": payload['id']}))
+            video["favorite_by_me"] = bool(dbs.likes.find_one({"video_id": video["_id"], "type": "favorite", "username": payload['id']}))
         return jsonify({'msg': '선택!', 'video': videos})
+    except (jwt.ExpiredSignatureError, jwt.exceptions.DecodeError):
+        return redirect(url_for("home"))
+
+
+@app.route("/favorite/post", methods=["POST"])
+def post_fa():
+    token_receive = request.cookies.get('mytoken')
+    # 여러개 찾기 - 예시 ( _id 값은 제외하고 출력)
+    video_list =[]
+    try:
+        payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
+        videos = list(dbs.likes.find({ "type": "favorite", "username": payload['id']}))
+        for video in videos:
+            ID = ObjectId(video['video_id'])
+            myvideo = dbs.youtube.find_one({"_id":ID},{'_id':False})
+            myvideo['video_id'] = video['video_id']
+            myvideo["count_heart"] = dbs.likes.count_documents({"video_id": video["video_id"], "type": "heart"})
+            myvideo["heart_by_me"] = bool(dbs.likes.find_one({"video_id": video["video_id"], "type": "heart", "username": payload['id']}))
+            myvideo["favorite_by_me"] = bool(dbs.likes.find_one({"video_id": video["video_id"], "type": "favorite", "username": payload['id']}))
+            print(myvideo["count_heart"],myvideo["heart_by_me"],myvideo["favorite_by_me"])
+            video_list.append(myvideo)
+        return jsonify({'msg': '선택!', 'video': video_list})
     except (jwt.ExpiredSignatureError, jwt.exceptions.DecodeError):
         return redirect(url_for("home"))
 
@@ -134,7 +165,6 @@ def update_like():
         return jsonify({"result": "success", 'msg': 'updated', "count": count})
     except (jwt.ExpiredSignatureError, jwt.exceptions.DecodeError):
         return redirect(url_for("home"))
-
 
 if __name__ == '__main__':
     app.run('0.0.0.0', port=5000, debug=True)
