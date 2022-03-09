@@ -110,7 +110,6 @@ function post_fa(num) {
                                   <img src="${img}" class="mypic">
                                   <div class="card-body">
                                     <p class="card-title">${title}</p>
-                                    <p class="card-text">Go for show</p>
                                     <a href="http://www.youtube.com${url}">보러가기</a>
                                   </div>
                                       <nav class="level is-mobile">
