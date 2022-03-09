@@ -73,4 +73,10 @@
 }
 .card{
     float:left;
+    height : 450px;
+    width : 300px;
+    margin : 10px;
+}
+.card-title{
+    font-size : 20px
 }
