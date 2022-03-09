@@ -1,10 +1,115 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <!-- Webpage Title -->
+    <title>저장 영상 | 내 몸 처방전</title>
+
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" href="/static/css/favorite.css">
+
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
+
+    <!-- Font Awesome CSS -->
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <!-- JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+            crossorigin="anonymous"></script>
+
+    <script type="text/javascript" src="../static/js/favorite.js"></script>
+
+    <link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap" rel="stylesheet">
+
 </head>
+
 <body>
 
+<!-- Header -->
+<header>
+    <nav class="navbar" role="navigation" aria-label="main navigation">
+        <div class="navbar-brand">
+            <img src="{{ url_for('static', filename='img/logo.png') }}" alt="웹 로고" width="112", height="15">
+            내 몸 처방전
+        </div>
+
+        <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+        </a>
+        </div>
+
+        <div class="navbar-end">
+            <div class="navbar-item">
+                <div class="buttons">
+                    <a class="button is-primary">
+                        <strong>Sign up</strong>
+                    </a>
+                    <a class="button is-light">
+                        Log in
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<!-- 메뉴 -->
+<aside class="menu">
+    <h6 class="menu-title">
+        부위별 영상
+    </h6>
+    <ul class="menu-list">
+        <li>
+            <button class="button is-primary" id="btn1" onclick="posting(1)">head</button>
+        </li>
+        <li>
+            <button class="button is-primary" id="btn2" onclick="posting(2)">목</button>
+        </li>
+        <li>
+            <button class="button is-primary" id="btn3" onclick="posting(3)">등</button>
+        </li>
+        <li>
+            <button class="button is-primary" id="btn4" onclick="posting(4)">어깨</button>
+        </li>
+        <li>
+            <button class="button is-primary" id="btn5" onclick="posting(5)">허리</button>
+        </li>
+        <li>
+            <button class="button is-primary" id="btn6" onclick="posting(6)">골반</button>
+        </li>
+        <li>
+            <button class="button is-primary" id="btn7" onclick="posting(7)">허벅지</button>
+        </li>
+        <li>
+            <button class="button is-primary" id="btn8" onclick="posting(8)">무릎</button>
+        </li>
+        <li>
+            <button class="button is-primary" id="btn9" onclick="posting(9)">종아리</button>
+        </li>
+        <li>
+            <button class="button is-primary" id="btn10" onclick="remove()">지우기</button>
+        </li>
+    </ul>
+</aside>
+
+<!-- 영상 리스트 -->
+<section class="content">
+    <div id="cards-box" class="row row-cols-1 row-cols-md-4 g-4"></div>
+</section>
+
+
 </body>
+
 </html>
+
+
