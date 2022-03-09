@@ -122,7 +122,7 @@ function posting(num) {
                 }
 
                 let temp_html = `
-                                <div class="card border-primary mb-3" id="${row["_id"]}" style="max-width: 20rem;font-family: 'Hi Melody', cursive;" >
+                                <div class="card border-primary mb-3" id="${row["_id"]}" style="max-width: 15rem;" >
                                   <div class="card-header">${name}</div>
                                   <img src="${img}" class="mypic">
                                   <div class="card-body">
@@ -132,9 +132,9 @@ function posting(num) {
                                   </div>
                                       <nav class="level is-mobile">
                                             <div class="level-left">
-                                                <a class="level-item is-sparta" aria-label="heart" onclick="toggle_like('${row["_id"]}','heart')">
+                                                <a style="text-decoration: none" class="level-item is-sparta" aria-label="heart" onclick="toggle_like('${row["_id"]}','heart')">
                                                     <span class="icon is-small"><i class="fa ${class_heart}" aria-hidden="true" style="color: red"></i></span>&nbsp;<span class="like-num">${count}</span>
-                                                <a class="level-item is-sparta" aria-label="favorite" onclick="toggle_favorite('${row["_id"]}','favorite')">
+                                                <a style="text-decoration:none " class="level-item is-sparta" aria-label="favorite" onclick="toggle_favorite('${row["_id"]}','favorite')">
                                                     <span class="icon is-small"><i class="fa ${class_favorite}" aria-hidden="true" style="color: yellow"></i></span>&nbsp;
                                                 </a>
                                             </div>
