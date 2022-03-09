@@ -8,7 +8,9 @@
 
 .navbar-brand {
 }
-
+body{
+    background-color: #20c997;
+}
 .card {
     margin: 10px;
     width: 25%;
