@@ -131,7 +131,7 @@ def post_fa():
         for video in videos:
             ID = ObjectId(video['video_id'])
             myvideo = dbs.youtube.find_one({"_id":ID},{'_id':False})
-            myvideo['_id'] = video['video_id']
+            myvideo['video_id'] = video['video_id']
             myvideo["count_heart"] = dbs.likes.count_documents({"video_id": video["video_id"], "type": "heart"})
             myvideo["heart_by_me"] = bool(dbs.likes.find_one({"video_id": video["video_id"], "type": "heart", "username": payload['id']}))
             myvideo["favorite_by_me"] = bool(dbs.likes.find_one({"video_id": video["video_id"], "type": "favorite", "username": payload['id']}))

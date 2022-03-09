@@ -1,0 +1,37 @@
+
+.navbar {
+    margin-bottom: 50px;
+}
+
+.navbar-brand {
+}
+
+.card {
+    margin: 20px auto 0px auto;
+    width: 25%;
+    max-width: 1200px;
+}
+
+.menu {
+    display: block;
+    float : left;
+    width: 150px;
+}
+
+.menu-title {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.menu-list > li {
+    padding: 5px
+}
+
+.content {
+}
+
+.card-title{
+    font-size : 15px;
+}
