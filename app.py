@@ -6,6 +6,7 @@ from flask import Flask, render_template, jsonify, request, redirect, url_for
 from werkzeug.utils import secure_filename
 from datetime import datetime, timedelta
 from bson import ObjectId
+from flask import session
 import json
 from bson import json_util
 
@@ -36,15 +37,15 @@ def home():
         return redirect(url_for("login", msg="로그인 정보가 존재하지 않습니다."))
 
 
-@app.route('/index')
-def index():
-    return render_template('index.html')
 
 @app.route('/login')
 def login():
     msg = request.args.get("msg")
     return render_template('login.html', msg=msg)
 
+@app.route('/logout')
+def logout():
+    return redirect
 
 @app.route('/signup')
 def signup():

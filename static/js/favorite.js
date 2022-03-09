@@ -64,7 +64,10 @@ function toggle_like_fa(video_id, type) {
 
     }
 }
-
+//
+// function  log_out(){
+//
+// }
 
 function post_fa(num) {
     $('#cards-box').empty()

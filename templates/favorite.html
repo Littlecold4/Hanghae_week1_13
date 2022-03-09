@@ -42,8 +42,8 @@
 <header>
     <nav class="navbar" role="navigation" aria-label="main navigation">
         <div class="navbar-brand">
-            <img src="{{ url_for('static', filename='img/logo.png') }}" alt="웹 로고" width="112", height="15">
-            내 몸 처방전
+            <img src="{{ url_for('static', filename='img/logo.png') }}" alt="웹 로고" width="112", height="15" onclick="window.location.href='/'">
+            <h1 onclick="window.location.href='/'">내몸 처방전</h1>
         </div>
 
         <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
@@ -57,10 +57,7 @@
             <div class="navbar-item">
                 <div class="buttons">
                     <a class="button is-primary">
-                        <strong>Sign up</strong>
-                    </a>
-                    <a class="button is-light">
-                        Log in
+                        <strong>log out</strong>
                     </a>
                 </div>
             </div>
@@ -102,7 +99,7 @@
             <button class="button is-primary" id="btn9" onclick="post_fa(9)">종아리</button>
         </li>
         <li>
-            <button class="button is-primary" id="btn10" onclick="remove()">지우기</button>
+            <button class="button is-primary" id="btn10" onclick="$('#cards-box').empty()">지우기</button>
         </li>
     </ul>
 </aside>
