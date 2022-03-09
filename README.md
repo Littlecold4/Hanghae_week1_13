@@ -27,3 +27,11 @@ https://inky-crab-bf6.notion.site/Chapter-1-_B-13-7af5ad524c06402ebe4d607e7a94e9
 - Bootstrap
 - Bulma
 - AWS EC2
+<<<<<<< HEAD
+=======
+
+
+
+
+
+>>>>>>> 24c1ba0d59fb032c98bf3f58cca1c28f9f82b7b1
