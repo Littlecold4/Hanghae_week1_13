@@ -1,6 +1,9 @@
-
+*{
+    font-family: 'Black Han Sans';
+}
 .navbar {
     margin-bottom: 50px;
+    background-color: #20c997;
 }
 
 .navbar-brand {
@@ -10,14 +13,21 @@
     margin: 10px;
     width: 25%;
     max-width: 1200px;
+    outline-color: #20c997;
 }
-
 .menu {
+    position: sticky;
+    top:20px;
+    border-radius: 5px;
+    padding-top:10px;
+    margin-left: 20px;
     display: block;
     float : left;
     width: 150px;
+    outline: #20c997 dotted 5px;
 }
-
+.menu-list{
+}
 .menu-title {
     display: flex;
     flex-direction: column;
@@ -34,4 +44,9 @@
 
 .card-title{
     font-size : 15px;
+}
+.row{
+    outline-color: #20c997;
+    outline-style: solid;
+    outline: 10px;
 }

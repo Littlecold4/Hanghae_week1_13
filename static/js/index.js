@@ -122,7 +122,7 @@ function posting(num) {
                 }
 
                 let temp_html = `
-                                <div class="card border-primary mb-3" id="${row["_id"]}" style="max-width: 20rem;" >
+                                <div class="card border-primary mb-3" id="${row["_id"]}" style="max-width: 20rem;font-family: 'Hi Melody', cursive;" >
                                   <div class="card-header">${name}</div>
                                   <img src="${img}" class="mypic">
                                   <div class="card-body">

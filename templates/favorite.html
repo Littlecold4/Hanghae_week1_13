@@ -42,8 +42,9 @@
 <header>
     <nav class="navbar" role="navigation" aria-label="main navigation">
         <div class="navbar-brand">
-            <img src="{{ url_for('static', filename='img/logo.png') }}" alt="웹 로고" width="112", height="15" onclick="window.location.href='/'">
-            <h1 onclick="window.location.href='/'">내몸 처방전</h1>
+            <img src="{{ url_for('static', filename='img/logo.png') }}" alt="웹 로고" width="112", height="15" onclick="window.location.href='/'"
+            style="cursor: pointer">
+            <h1 onclick="window.location.href='/'" style="cursor: pointer">내몸 처방전</h1>
         </div>
 
         <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">

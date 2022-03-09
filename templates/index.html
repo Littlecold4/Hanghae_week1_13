@@ -5,8 +5,9 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
+    <link rel="stylesheet" href="/static/css/animations.css">
     <link rel="stylesheet" href="/static/css/index.css">
-
+    <!--    <link href="/static/css/boots.css" rel="stylesheet">-->
 
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
@@ -18,39 +19,32 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
             crossorigin="anonymous"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<!--    폰트-->
+    <link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Hi+Melody&display=swap" rel="stylesheet">
+
+
 
     <title>내 몸 처방전</title>
-    <script type="text/javascript" src="../static/js/index.js"></script>
+    <script type=" text/javascript" src="../static/js/index.js"></script>
 
     <link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../../AppData/Local/Temp/headers.css">
+
 
 </head>
 
 <body>
-<!--<div class="card border-primary mb-3" id="hi" style="max-width: 20rem;">-->
-<!--    <div class="card-header">gd</div>-->
-<!--    <img src="${img}" class="mypic">-->
-<!--    <div class="card-body">-->
-<!--        <h4 class="card-title">gd}</h4>-->
-<!--        <p class="card-text">Go for show</p>-->
-<!--        <a href="http://www.youtube.com${url}">보러가기</a>-->
-<!--    </div>-->
-<!--    <nav class="level is-mobile">-->
-<!--        <div class="level-left">-->
-<!--            <a class="level-item is-sparta" aria-label="heart" onclick="toggle_like('gd','heart')">-->
-<!--                <span class="icon is-small"><i class="fa ${class_heart}" aria-hidden="true"></i></span>&nbsp;<span-->
-<!--                    class="like-num">2.7k</span>-->
-<!--            </a>-->
-<!--        </div>-->
-<!--    </nav>-->
-<!--</div>-->
-<!--`-->
-
 <header>
-    <nav class="navbar" role="navigation" aria-label="main navigation">
+    <nav class="navbar is-primary" role="navigation" aria-label="main navigation">
         <div class="navbar-brand">
-            <img src="{{ url_for('static', filename='img/logo.png') }}" alt="웹 로고" width="112", height="15" onclick="window.location.href='/'">
-            <h1 onclick="window.location.href='/'">내몸 처방전</h1>
+            <img src="{{ url_for('static', filename='img/logo.png') }}" alt="웹 로고" width="150" , height="15"
+                 onclick="window.location.href='/'"
+                 style="cursor: pointer">
+            <h1 onclick="window.location.href='/'" style="cursor: pointer; font-size: 3.5rem">내
+                몸<br>&nbsp;&nbsp; 처방전</h1>
         </div>
 
         <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
@@ -63,7 +57,7 @@
         <div class="navbar-end">
             <div class="navbar-item">
                 <div class="buttons">
-                    <a class="button is-primary">
+                    <a class="button is-light">
                         <strong>log out</strong>
                     </a>
                     <a class="button is-light" href="/favorite">
