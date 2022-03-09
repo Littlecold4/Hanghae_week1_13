@@ -81,6 +81,18 @@ body {
     border: 1px gray solid;
 }
 
+.int-area > label {
+    position: absolute;
+    top: 19px;
+    left: 10px;
+    color: dimgray;
+}
+
+.int-area > input:focus + label,
+.int-area > input:valid + label {
+    display: none;
+}
+
 .signup-btn {
     background-color: rgb(140, 221, 248);
     color: white;
