@@ -3,7 +3,7 @@ $(document).ready(function () {
     switch_btn(part_num);
 });
 
-
+//좋아요
 function toggle_like(video_id, type) {
     let $a_like = $(`#${video_id} a[aria-label='heart']`)
     let $i_like = $a_like.find("i")
@@ -43,7 +43,7 @@ function toggle_like(video_id, type) {
     }
 
 }
-
+//즐겨찾기
 function toggle_favorite(video_id, type) {
     // console.log(video_id, type)
     let $a_like = $(`#${video_id} a[aria-label='favorite']`)
@@ -88,22 +88,21 @@ function toggle_favorite(video_id, type) {
 }
 
 
-
-function switch_btn(num){
-    let btn_num = 'btn'+num
-    // let $a_like = $(`#${btn_num}`)
-    // console.log($a_like)
-    // console.log(btn_num)
-    let a= "human-btn "+btn_num
-    if(document.getElementById(btn_num).className==a) {
+// 버튼 색 변화
+function switch_btn(num){   //num =누른 버튼의 번호
+    let btn_num = 'btn'+num     // btn_num =누른 버튼의 id
+    //human-btn btn() : 현재 눌려있지 않은 버튼
+    //human-btn-click btn() : 현재 눌려있느 버튼
+    let a= "human-btn "+btn_num   // a= human-btn btn()
+    if(document.getElementById(btn_num).className==a) {     //현재 누른 버튼의 class가 human-btn btn과 같다면 (현재 누른 버튼이 눌려있지 않은 상태라면)
         console.log(num)
-        document.getElementById(btn_num).className = 'human-btn-click ' + btn_num
-        for(let i=1; i<=9;i++){
-            if(i !=num){
-                let btn_num = 'btn'+i
-                let a ='human-btn ' +'btn'+i
-                document.getElementById(btn_num).className =a
-            }
+        document.getElementById(btn_num).className = 'human-btn-click ' + btn_num  //현재 누른 버튼의 class를 human-btn-click btn()으로 변경(누른상태로 변경)
+        for(let i=1; i<=9;i++){  //9개의 버튼을 반복
+            if(i !=num){       //현재 누른 버튼은 시행하지 않음
+                let btn_num = 'btn'+i      // btn() : 1~9까지 현재 누른 버튼 번호 제외
+                let a ='human-btn ' +'btn'+i  // human-btn btn() : 1~9까지 현재 누른 버튼 번호 제외
+                document.getElementById(btn_num).className =a  //현재 누른 버튼을 제외하고 class를 human-btn btn()으로 변경
+            }  //나머지 버튼을 안누른 상태로 바꾸는 함수
         }
         }else{
         document.getElementById(btn_num).className = 'human-btn '+btn_num
@@ -112,86 +111,7 @@ function switch_btn(num){
 }
 
 
-function posting(num) {
-    let btn_num = 'btn'+num
-    // let $a_like = $(`#${btn_num}`)
-    // console.log($a_like)
-    // console.log(btn_num)
-    let a= "human-btn "+btn_num
-    if(document.getElementById(btn_num).className==a) {
-        console.log(num)
-        document.getElementById(btn_num).className = 'human-btn-click ' + btn_num
-        for(let i=1; i<=9;i++){
-            if(i !=num){
-                let btn_num = 'btn'+i
-                let a ='human-btn ' +'btn'+i
-                document.getElementById(btn_num).className =a
-            }
-        }
-        $('#list').empty()
-        $.ajax({
-        type: 'POST',
-        url: '/index',
-        data: {num_give: num},
-        success: function (response) {
-            // console.log(response['video'])
-            let rows = response['video']
-            for (let i = 0; i < rows.length; i++) {
-                let row = rows[i]
-                let img = row['img']
-                let title = row['title']
-                let name = row['name']
-                let url = row['url']
-                let count = row['count_heart']
-                // console.log(count)
-                let class_heart = ""
-                if (row["heart_by_me"]) {
-                    class_heart = 'fa-heart'
-                    // console.log(class_heart)
-                } else {
-                    class_heart = 'fa-heart-o'
-                    // console.log(class_heart)
-                }
-                let class_favorite = ""
-                if (row["favorite_by_me"]) {
-                    class_favorite = 'fa-star'
-                    // console.log(class_favorite)
-                } else {
-                    class_favorite = 'fa-star-o'
-                    // console.log(class_favorite)
-                }
-
-                let temp_html = `
-                                <div class="card" id="${row["_id"]}" style="max-width: 15rem; outline: #20c997 10px" >
-                                  <div class="card-header">${name}</div>
-                                  <img src="${img}" class="mypic">
-                                  <div class="card-body">
-                                    <h4 class="card-title">${title}</h4>
-                                    <a href="http://www.youtube.com${url}" target="_blank">보러가기</a>
-                                  </div>
-                                      <nav class="level is-mobile">
-                                            <div class="level-left">
-                                                <a style="text-decoration: none" class="level-item is-sparta" aria-label="heart" onclick="toggle_like('${row["_id"]}','heart')">
-                                                    <span class="icon is-small"><i class="fa ${class_heart}" aria-hidden="true" style="color: red"></i></span>&nbsp;<span class="like-num">${count}</span>
-                                                <a style="text-decoration:none " class="level-item is-sparta" aria-label="favorite" onclick="toggle_favorite('${row["_id"]}','favorite')">
-                                                    <span class="icon is-small"><i class="fa ${class_favorite}" aria-hidden="true" style="color: yellow"></i></span>&nbsp;
-                                                </a>
-                                            </div>
-                                    </nav>
-                                </div>`
-
-                $('#list').append(temp_html)
-            }
-        }
-    });
-    }else{
-        document.getElementById(btn_num).className = 'human-btn '+btn_num
-        $('#list').empty()
-    }
-
-}
-
-
+// 로그아웃 기능
 function sign_out() {
             $.removeCookie('mytoken', {path: '/'});
             alert('로그아웃!')

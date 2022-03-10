@@ -34,7 +34,7 @@
 
 
     <script>
-         let part_num ='{{ word }}'
+        let part_num = '{{ word }}'
     </script>
     <script type=" text/javascript" src="../static/js/index.js"></script>
 </head>
@@ -94,26 +94,29 @@
 
 
         {% for result in results %}
-        <div class="card" id="{{ result._id }}" style="max-width: 15rem; outline: #20c997 10px; display:inline-block">
-            <div class="card-header">{{ result.name }}</div>
-            <img src="{{ result.img }}" class="mypic">
-            <div class="card-body">
-                <h4 class="card-title">{{ result.title }}</h4>
-                <a href="http://www.youtube.com{{ result.url }}" target="_blank">보러가기</a>
-            </div>
-            <nav class="level is-mobile">
-                <div class="level-left">
-                    <a style="text-decoration: none" class="level-item is-sparta" aria-label="heart"
-                       onclick="toggle_like('{{ result._id }}','heart')">
-                        <span class="icon is-small"><i class="fa {{result.heart_by_me}}" aria-hidden="true"
-                                                       style="color: red"></i></span>&nbsp;<span class="like-num">{{ result.count_heart }}</span></a>
+            <div class="card" id="{{ result._id }}"
+                 style="max-width: 15rem; outline: #20c997 10px; display:inline-block; position:relative">
+                <div class="card-header">{{ result.name }}</div>
+                <img src="{{ result.img }}" class="mypic">
+                <div class="card-body">
+                    <h4 class="card-title">{{ result.title }}</h4>
+                    <a href="http://www.youtube.com{{ result.url }}" target="_blank"
+                       style="text-decoration: none">보러가기</a>
+                </div>
+                <nav class="level is-mobile" style="padding: 16px; position:absolute; bottom:0;">
+                    <div class="level-left">
+                        <a style="text-decoration: none" class="level-item is-sparta" aria-label="heart"
+                           onclick="toggle_like('{{ result._id }}','heart')">
+                    <span class="icon is-small"><i class="fa {{ result.heart_by_me }}" aria-hidden="true"
+                                                   style="color: red"></i></span>&nbsp;<span
+                                class="like-num">{{ result.count_heart }}</span></a>
                         <a style="text-decoration:none " class="level-item is-sparta" aria-label="favorite"
                            onclick="toggle_favorite('{{ result._id }}','favorite')">
-                            <span class="icon is-small"><i class="fa {{result.favorite_by_me}}" aria-hidden="true"
-                                                           style="color: yellow"></i></span>&nbsp;</a>
-                </div>
-            </nav>
-        </div>
+                        <span class="icon is-small"><i class="fa {{ result.favorite_by_me }}" aria-hidden="true"
+                                                       style="color: yellow"></i></span>&nbsp;</a>
+                    </div>
+                </nav>
+            </div>
         {% endfor %}
     </section>
 

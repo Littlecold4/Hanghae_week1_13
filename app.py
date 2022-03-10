@@ -37,25 +37,29 @@ def home():
     except jwt.exceptions.DecodeError:
         return redirect(url_for("login", msg="로그인 정보가 존재하지 않습니다."))
 
+# 부위별 영상 리스트
 @app.route('/<keyword>')
 def home_menu(keyword):
-    token_receive = request.cookies.get('mytoken')
-    payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
-    videos = list(dbs.youtube.find({'num': int(keyword)}, {}))
-    print(videos)
-    for video in videos:
-        print('1')
-        video["_id"] = str(video["_id"])
-        video["count_heart"] = dbs.likes.count_documents({"video_id": video["_id"], "type": "heart"})
-        if bool(dbs.likes.find_one({"video_id": video["_id"], "type": "heart", "username": payload['id']})) is True:
-            video["heart_by_me"] ='fa-heart'
-        else :
-            video["heart_by_me"] = 'fa-heart-o'
-        if bool( dbs.likes.find_one({"video_id": video["_id"], "type": "favorite", "username": payload['id']})) is True:
-            video["favorite_by_me"] ='fa-star'
-        else :
-            video["favorite_by_me"] = 'fa-star-o'
-    return render_template('index.html',word=keyword, results= videos)
+    try:
+        token_receive = request.cookies.get('mytoken')
+        payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
+        videos = list(dbs.youtube.find({'num': int(keyword)}, {}))
+        print(videos)
+        for video in videos:
+            print('1')
+            video["_id"] = str(video["_id"])
+            video["count_heart"] = dbs.likes.count_documents({"video_id": video["_id"], "type": "heart"})
+            if bool(dbs.likes.find_one({"video_id": video["_id"], "type": "heart", "username": payload['id']})) is True:
+                video["heart_by_me"] ='fa-heart'
+            else :
+                video["heart_by_me"] = 'fa-heart-o'
+            if bool( dbs.likes.find_one({"video_id": video["_id"], "type": "favorite", "username": payload['id']})) is True:
+                video["favorite_by_me"] ='fa-star'
+            else :
+                video["favorite_by_me"] = 'fa-star-o'
+        return render_template('index.html',word=keyword, results= videos)
+    except (jwt.ExpiredSignatureError, jwt.exceptions.DecodeError):
+        return redirect(url_for("home"))
 
 #로그인 페이지
 @app.route('/login')
@@ -72,6 +76,32 @@ def signup():
 @app.route('/favorite')
 def favorite():
     return render_template('favorite.html')
+
+# 즐겨찾기 영상 리스트
+@app.route('/favorite/<keyword>')
+def favorite_menu(keyword):
+    token_receive = request.cookies.get('mytoken')
+    # 여러개 찾기 - 예시 ( _id 값은 제외하고 출력)
+    video_list = []
+    try:
+        payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
+        videos = list(dbs.likes.find({"type": "favorite", "username": payload['id']}))
+        for video in videos:
+            ID = ObjectId(video['video_id'])
+            myvideo = dbs.youtube.find_one({"_id": ID}, {'_id': False})
+            if myvideo['num'] == int(keyword):
+                myvideo['video_id'] = video['video_id']
+                myvideo["count_heart"] = dbs.likes.count_documents({"video_id": video["video_id"], "type": "heart"})
+                if bool(dbs.likes.find_one({"video_id": myvideo["video_id"], "type": "heart", "username": payload['id']})) is True:
+                    myvideo["heart_by_me"] = 'fa-heart'
+                else:
+                    myvideo["heart_by_me"] = 'fa-heart-o'
+                myvideo["favorite_by_me"] = 'fa-star'
+                video_list.append(myvideo)
+        return render_template('favorite.html',word=keyword, results= video_list)
+    except (jwt.ExpiredSignatureError, jwt.exceptions.DecodeError):
+        return redirect(url_for("favorite"))
+
 
 
 
@@ -123,23 +153,7 @@ def sign_in():
 
 
 
-# 부위별 영상 리스트
-@app.route("/index", methods=["POST"])
-def post():
-    num_receive = request.form['num_give']
-    token_receive = request.cookies.get('mytoken')
-    # 여러개 찾기 - 예시 ( _id 값은 제외하고 출력)
-    try:
-        payload = jwt.decode(token_receive, SECRET_KEY,algorithms=['HS256'])
-        videos = list(dbs.youtube.find({'num': int(num_receive)}, {}))
-        for video in videos:
-            video["_id"] = str(video["_id"])
-            video["count_heart"] = dbs.likes.count_documents({"video_id": video["_id"], "type": "heart"})
-            video["heart_by_me"] = bool(dbs.likes.find_one({"video_id": video["_id"], "type": "heart", "username": payload['id']}))
-            video["favorite_by_me"] = bool(dbs.likes.find_one({"video_id": video["_id"], "type": "favorite", "username": payload['id']}))
-        return jsonify({'msg': '선택!', 'video': videos})
-    except (jwt.ExpiredSignatureError, jwt.exceptions.DecodeError):
-        return redirect(url_for("home"))
+
 
 
 # 좋아요, 즐겨찾기
@@ -169,27 +183,6 @@ def update_like():
         return redirect(url_for("home"))
 
 
-# 즐겨찾기 영상 리스트
-@app.route("/favorite/post", methods=["POST"])
-def post_fa():
-    token_receive = request.cookies.get('mytoken')
-    # 여러개 찾기 - 예시 ( _id 값은 제외하고 출력)
-    video_list =[]
-    try:
-        payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
-        videos = list(dbs.likes.find({"type": "favorite", "username": payload['id']}))
-        for video in videos:
-            ID = ObjectId(video['video_id'])
-            myvideo = dbs.youtube.find_one({"_id":ID},{'_id':False})
-            myvideo['video_id'] = video['video_id']
-            myvideo["count_heart"] = dbs.likes.count_documents({"video_id": video["video_id"], "type": "heart"})
-            myvideo["heart_by_me"] = bool(dbs.likes.find_one({"video_id": video["video_id"], "type": "heart", "username": payload['id']}))
-            myvideo["favorite_by_me"] = bool(dbs.likes.find_one({"video_id": video["video_id"], "type": "favorite", "username": payload['id']}))
-            print(myvideo["count_heart"],myvideo["heart_by_me"],myvideo["favorite_by_me"])
-            video_list.append(myvideo)
-        return jsonify({'msg': '선택!', 'video': video_list})
-    except (jwt.ExpiredSignatureError, jwt.exceptions.DecodeError):
-        return redirect(url_for("favorite"))
 
 
 

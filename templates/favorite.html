@@ -37,62 +37,91 @@
     <link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap" rel="stylesheet">
 
     <!-- favorite.js 연결 -->
+    <script>
+        let part_num = '{{ word }}'
+    </script>
     <script type="text/javascript" src="../static/js/favorite.js"></script>
 </head>
 
 <body>
-    <!-- Header -->
-    <header>
-        <!-- 네비게이션 영역 -->
-        <nav class="navbar is-primary" role="navigation" aria-label="main navigation">
-            <!-- 로고&타이틀 -->
-            <div class="navbar-brand">
-                <img src="{{ url_for('static', filename='img/logo.png') }}" alt="웹 로고" width="150" , height="15"
-                     onclick="window.location.href='/'"
-                     style="cursor: pointer">
-                <h1 onclick="window.location.href='/'" style="cursor: pointer; font-size: 3.5rem">내 몸 처방전<br>&nbsp;&nbsp; MY PAGE
-                </h1>
-            </div>
-            <!-- 로그아웃, 마이페이지 버튼-->
-            <div class="navbar-end">
-                <div class="navbar-item">
-                    <div class="buttons">
-                        <a class="button is-light">
-                            <strong onclick="sign_out()">log out</strong>
-                        </a>
-                        <a class="button is-light" href="/">MAIN PAGE</a>
-                    </div>
+<!-- Header -->
+<header>
+    <!-- 네비게이션 영역 -->
+    <nav class="navbar is-primary" role="navigation" aria-label="main navigation">
+        <!-- 로고&타이틀 -->
+        <div class="navbar-brand">
+            <img src="{{ url_for('static', filename='img/logo.png') }}" alt="웹 로고" width="150" , height="15"
+                 onclick="window.location.href='/'"
+                 style="cursor: pointer">
+            <h1 onclick="window.location.href='/'" style="cursor: pointer; font-size: 3.5rem">내 몸 처방전<br>&nbsp;&nbsp; MY
+                PAGE
+            </h1>
+        </div>
+        <!-- 로그아웃, 마이페이지 버튼-->
+        <div class="navbar-end">
+            <div class="navbar-item">
+                <div class="buttons">
+                    <a class="button is-light">
+                        <strong onclick="sign_out()">log out</strong>
+                    </a>
+                    <a class="button is-light" href="/">MAIN PAGE</a>
                 </div>
             </div>
-        </nav>
-    </header>
+        </div>
+    </nav>
+</header>
 
-    <div class="wrap">
-        <!-- 메뉴 영역 -->
-        <aside>
-            <h6 class="menu-title">부위별 영상</h6>
-            <div class="human-wrap">
-                <!-- 인체 이미지 -->
-                <img class="human-img" src="{{ url_for('static', filename='img/human.png') }}" alt="">
-                <!-- 부위별 영상 버튼 -->
-                <div class="human-btns">
-                    <button class="human-btn btn1" id="btn1" onclick="posting_fa(1)">머리</button>
-                    <button class="human-btn btn2" id="btn2" onclick="posting_fa(2)">목</button>
-                    <button class="human-btn btn3" id="btn3" onclick="posting_fa(3)">등</button>
-                    <button class="human-btn btn4" id="btn4" onclick="posting_fa(4)">어깨</button>
-                    <button class="human-btn btn5" id="btn5" onclick="posting_fa(5)">허리</button>
-                    <button class="human-btn btn6" id="btn6" onclick="posting_fa(6)">골반</button>
-                    <button class="human-btn btn7" id="btn7" onclick="posting_fa(7)">허벅지</button>
-                    <button class="human-btn btn8" id="btn8" onclick="posting_fa(8)">무릎</button>
-                    <button class="human-btn btn9" id="btn9" onclick="posting_fa(9)">종아리</button>
-                </div>
+<div class="wrap">
+    <!-- 메뉴 영역 -->
+    <aside>
+        <h6 class="menu-title">부위별 영상</h6>
+        <div class="human-wrap">
+            <!-- 인체 이미지 -->
+            <img class="human-img" src="{{ url_for('static', filename='img/human.png') }}" alt="">
+            <!-- 부위별 영상 버튼 -->
+            <div class="human-btns">
+                <button class="human-btn btn1" id="btn1" onclick="window.location.href='/favorite/1'">머리</button>
+                <button class="human-btn btn2" id="btn2" onclick="window.location.href='/favorite/2'">목</button>
+                <button class="human-btn btn3" id="btn3" onclick="window.location.href='/favorite/3'">등</button>
+                <button class="human-btn btn4" id="btn4" onclick="window.location.href='/favorite/4'">어깨</button>
+                <button class="human-btn btn5" id="btn5" onclick="window.location.href='/favorite/5'">허리</button>
+                <button class="human-btn btn6" id="btn6" onclick="window.location.href='/favorite/6'">골반</button>
+                <button class="human-btn btn7" id="btn7" onclick="window.location.href='/favorite/7'">허벅지</button>
+                <button class="human-btn btn8" id="btn8" onclick="window.location.href='/favorite/8'">무릎</button>
+                <button class="human-btn btn9" id="btn9" onclick="window.location.href='/favorite/9'">종아리</button>
             </div>
-        </aside>
-        <!-- 부위별 영상 리스트 -->
-        <section class="content">
-            <div id="list" class="row row-cols-1 row-cols-md-4 g-4"></div>
-        </section>
-    </div>
+        </div>
+    </aside>
+    <!-- 부위별 영상 리스트 -->
+    <section class="content">
+        <div id="list" class="row row-cols-1 row-cols-md-4 g-4"></div>
+        {% for result in results %}
+            <div class="card" id="{{ result.video_id }}"
+                 style="max-width: 15rem; outline: #20c997 10px; display:inline-block; position:relative">
+                <div class="card-header">{{ result.name }}</div>
+                <img src="{{ result.img }}" class="mypic">
+                <div class="card-body">
+                    <h4 class="card-title">{{ result.title }}</h4>
+                    <a href="http://www.youtube.com{{ result.url }}" target="_blank"
+                       style="text-decoration: none">보러가기</a>
+                </div>
+                <nav class="level is-mobile" style="padding: 16px; position:absolute; bottom:0;">
+                    <div class="level-left">
+                        <a style="text-decoration: none" class="level-item is-sparta" aria-label="heart"
+                           onclick="toggle_like_fa('{{ result.video_id }}','heart')">
+                    <span class="icon is-small"><i class="fa {{ result.heart_by_me }}" aria-hidden="true"
+                                                   style="color: red"></i></span>&nbsp;<span
+                                class="like-num">{{ result.count_heart }}</span></a>
+                        <a style="text-decoration:none " class="level-item is-sparta" aria-label="favorite"
+                           onclick="delete_favorite('{{ result.video_id }}','favorite')">
+                        <span class="icon is-small"><i class="fa {{ result.favorite_by_me }}" aria-hidden="true"
+                                                       style="color: yellow"></i></span>&nbsp;</a>
+                    </div>
+                </nav>
+            </div>
+        {% endfor %}
+    </section>
+</div>
 </body>
 </html>
 

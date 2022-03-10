@@ -1,9 +1,10 @@
 $(document).ready(function () {
+    switch_btn(part_num)
 });
 
-//부위별 즐겨찾기 영상 리스트
-function posting_fa(num) {
-     let btn_num = 'btn'+num
+//버튼 색 변화
+function switch_btn(num){
+    let btn_num = 'btn'+num
     // let $a_like = $(`#${btn_num}`)
     // console.log($a_like)
     // console.log(btn_num)
@@ -11,73 +12,14 @@ function posting_fa(num) {
     if(document.getElementById(btn_num).className==a) {
         console.log(num)
         document.getElementById(btn_num).className = 'human-btn-click ' + btn_num
-        for (let i = 1; i <= 9; i++) {
-            if (i != num) {
-                let btn_num = 'btn' + i
-                let a = 'human-btn ' + 'btn' + i
-                document.getElementById(btn_num).className = a
+        for(let i=1; i<=9;i++){
+            if(i !=num){
+                let btn_num = 'btn'+i
+                let a ='human-btn ' +'btn'+i
+                document.getElementById(btn_num).className =a
             }
         }
-    $('#list').empty()
-    $.ajax({
-        type: 'POST',
-        url: '/favorite/post',
-        data: {},
-        success: function (response) {
-            // console.log(response['video'])
-            let rows = response['video']
-            for (let i = 0; i < rows.length; i++) {
-                let row = rows[i]
-                if (row['num'] == num) {
-                    let img = row['img']
-                    let title = row['title']
-                    let name = row['name']
-                    let url = row['url']
-                    let count = row['count_heart']
-                    // console.log(count)
-                    let class_heart = ""
-                    if (row["heart_by_me"]) {
-                        class_heart = 'fa-heart'
-                        // console.log(class_heart)
-                    } else {
-                        class_heart = 'fa-heart-o'
-                        // console.log(class_heart)
-                    }
-                    let class_favorite = ""
-                    if (row["favorite_by_me"]) {
-                        class_favorite = 'fa-star'
-                        // console.log(class_favorite)
-                    } else {
-                        class_favorite = 'fa-star-o'
-                        // console.log(class_favorite)
-                    }
-
-                    let temp_html = `
-                                <div class="card border-primary mb-3" id="${row["video_id"]}" style="max-width: 20rem;" >
-                                  <div class="card-header">${name}</div>
-                                  <img src="${img}" class="mypic">
-                                  <div class="card-body">
-                                    <p class="card-title">${title}</p>
-                                    <p class="card-text">Go for show</p>
-                                    <a href="http://www.youtube.com${url}" target="_blank">보러가기</a>
-                                    </div>
-                                      <nav class="level is-mobile">
-                                            <div class="level-left">
-                                                <a style="text-decoration:none " class="level-item is-sparta" aria-label="heart" onclick="toggle_like_fa('${row["video_id"]}','heart')">
-                                                    <span class="icon is-small"><i class="fa ${class_heart}" aria-hidden="true" style="color: red"></i></span>&nbsp;<span class="like-num">${count}</span>
-                                                <a style="text-decoration:none " class="level-item is-sparta" aria-label="favorite" onclick="delete_favorite('${row["video_id"]}','favorite')">
-                                                    <span class="icon is-small"><i class="fa ${class_favorite}" aria-hidden="true" style="color: yellow"></i></span>&nbsp;
-                                                </a>
-                                            </div>
-                                    </nav>
-                                </div>`
-
-                    $('#list').append(temp_html)
-                }
-            }
-        }
-    });
-}else{
+        }else{
         document.getElementById(btn_num).className = 'human-btn '+btn_num
         $('#list').empty()
     }
