@@ -13,10 +13,10 @@
 - 강동현, 이춘, 장민우
 
 # 웹사이트 링크
-
+http://dreamdog.site/
 
 # 데모영상
-
+https://youtu.be/T67INgWap9o
 
 # 와이어프레임
 https://inky-crab-bf6.notion.site/Chapter-1-_B-13-7af5ad524c06402ebe4d607e7a94e927
