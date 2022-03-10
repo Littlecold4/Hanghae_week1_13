@@ -21,6 +21,23 @@
 # 와이어프레임
 https://inky-crab-bf6.notion.site/Chapter-1-_B-13-7af5ad524c06402ebe4d607e7a94e927
 
+# 개발 기능
+| 기능                 | Method | URL                   | Request                                                                                    | Response                                                                                                                            |
+| -------------------- | ------ | --------------------- | ------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------- |
+| 메인화면 페이지 로드 | GET    | /                     | {'keyWord':keyWord}                                                                        | render_template('index.html',keyWord=keyWord)                                                                                       |
+| 로그인 페이지 로드   | GET    | /login                | msg                                                                                        | render_template('login.html', msg=msg)                                                                                              |
+| 회원가입 페이지 로드 | GET    | /signup               |                                                                                            | render_template('signup.html')                                                                                                        |
+| 마이 페이지 로드     | GET    | /favorite             |                                                                                            | Token 인증시 - render_template('favorite.html'), Token 미인증시 - render_template('login.html'){msg="로그인 정보가 존재하지 않습니다."}                       |
+| ID 중복검사          | POST   | /sign_up/check_dup    | {'id': user_id}                                                                            | 중복 아닐시 - {'msg': "사용 가능한 아이디 입니다."} 중복 시 - {'msg': "이미 존재하는 아이디 입니다."}                               |
+| 회원가입             | POST   | /signup               | {'id': user_id, 'pw': password}                                                            | {'msg': '회원가입이 완료되었습니다.'}                                                                                               |
+| 로그인               | POST   | /sign_in              | {'id': user_id, 'pw': password}                                                            | 로그인 성공 - {'result': 'success', 'token': token} 로그인 실패 - {'result': 'fail', 'msg': '아이디/비밀번호가 일치하지 않습니다.'} |
+| 부위별 동영상 조회   | GET    | /index/<keyword>      |                                                                                            | Token 인증시 - render_template('board_list.html'), Token 미인증시 - {msg="로그인 정보가 존재하지 않습니다."}                        |
+| mypage 동영상 조회   | GET    | /favorite/<keyword>     |                                                                                            | Token 인증시 - render_template('favorite.html',word=keyword, results= video_list), Token 미인증시 - {msg="로그인 정보가 존재하지 않습니다."}                      |
+| 좋아요               | POST   | /update_like    | {"result": "success", 'msg': msg, "count": count}|                                                                                                            |
+| 즐겨찾기             | POST   | /update_like    | {"result": "success", 'msg': msg, "count": count}             | {msg="즐겨찾기 추가!."/즐겨찾기 삭제!}                                                                                                             |
+ 
+
+
 # 기술스택
 - Flask
 - MongoDB
