@@ -19,7 +19,7 @@ function check_dup() {
         return;
     }
     if (!is_username(username)) {
-        $("#help-id").text("아이디의 형식을 확인해주세요.").removeClass("is-safe").addClass("is-danger")
+        $("#help-id").text("아이디의 형식을 확인해주세요. 영문과 숫자, 일부 특수문자(._-) 사용 가능. 2-10자 길이").removeClass("is-safe").addClass("is-danger")
         $("#input-username").focus()
         return;
     }
