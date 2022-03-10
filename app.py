@@ -24,6 +24,7 @@ client = MongoClient('mongodb+srv://test:sparta@cluster0.hr8wf.mongodb.net/Clust
 db = client.dbsparta_plus_week4
 
 
+#랜딩 페이지
 @app.route('/')
 def home():
     token_receive = request.cookies.get('mytoken')
@@ -37,49 +38,34 @@ def home():
         return redirect(url_for("login", msg="로그인 정보가 존재하지 않습니다."))
 
 
-
+#로그인 페이지
 @app.route('/login')
 def login():
     msg = request.args.get("msg")
     return render_template('login.html', msg=msg)
 
-@app.route('/logout')
-def logout():
-    return redirect
-
+#회원가입 페이지
 @app.route('/signup')
 def signup():
     return render_template('signup.html')
 
+#마이페이지(즐겨찾기) 페이지
 @app.route('/favorite')
 def favorite():
     return render_template('favorite.html')
 
 
 
-@app.route('/sign_in', methods=['POST'])
-def sign_in():
-    # 로그인
+
+# 회원가입 아이디 중복확인
+@app.route('/sign_up/check_dup', methods=['POST'])
+def check_dup():
     username_receive = request.form['username_give']
-    password_receive = request.form['password_give']
-
-    pw_hash = hashlib.sha256(password_receive.encode('utf-8')).hexdigest()
-
-    result = dbs.users.find_one({'username': username_receive, 'password': pw_hash})
-
-    if result is not None:
-        payload = {
-            'id': username_receive,
-            'exp': datetime.utcnow() + timedelta(seconds=60 * 60)  # 로그인 24시간 유지
-        }
-        token = jwt.encode(payload, SECRET_KEY, algorithm='HS256')
-
-        return jsonify({'result': 'success', 'token': token})
-    # 찾지 못하면
-    else:
-        return jsonify({'result': 'fail', 'msg': '아이디/비밀번호가 일치하지 않습니다.'})
+    exists = bool(dbs.users.find_one({"username": username_receive}))
+    return jsonify({'result': 'success', 'exists': exists})
 
 
+# 회원가입 회원정보 저장
 @app.route('/sign_up/save', methods=['POST'])
 def sign_up():
     username_receive = request.form['username_give']
@@ -94,15 +80,31 @@ def sign_up():
     return jsonify({'result': 'success'})
 
 
-@app.route('/sign_up/check_dup', methods=['POST'])
-def check_dup():
+# 로그인
+@app.route('/sign_in', methods=['POST'])
+def sign_in():
     username_receive = request.form['username_give']
-    exists = bool(dbs.users.find_one({"username": username_receive}))
-    return jsonify({'result': 'success', 'exists': exists})
+    password_receive = request.form['password_give']
+
+    pw_hash = hashlib.sha256(password_receive.encode('utf-8')).hexdigest()
+
+    result = dbs.users.find_one({'username': username_receive, 'password': pw_hash})
+    # 회원 정보 찾으면
+    if result is not None:
+        payload = {
+            'id': username_receive,
+            'exp': datetime.utcnow() + timedelta(seconds=60 * 60)  # 로그인 24시간 유지
+        }
+        token = jwt.encode(payload, SECRET_KEY, algorithm='HS256')
+
+        return jsonify({'result': 'success', 'token': token})
+    # 찾지 못하면
+    else:
+        return jsonify({'result': 'fail', 'msg': '아이디/비밀번호가 일치하지 않습니다.'})
 
 
 
-
+# 부위별 영상 리스트
 @app.route("/index", methods=["POST"])
 def post():
     num_receive = request.form['num_give']
@@ -121,28 +123,7 @@ def post():
         return redirect(url_for("home"))
 
 
-@app.route("/favorite/post", methods=["POST"])
-def post_fa():
-    token_receive = request.cookies.get('mytoken')
-    # 여러개 찾기 - 예시 ( _id 값은 제외하고 출력)
-    video_list =[]
-    try:
-        payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
-        videos = list(dbs.likes.find({ "type": "favorite", "username": payload['id']}))
-        for video in videos:
-            ID = ObjectId(video['video_id'])
-            myvideo = dbs.youtube.find_one({"_id":ID},{'_id':False})
-            myvideo['video_id'] = video['video_id']
-            myvideo["count_heart"] = dbs.likes.count_documents({"video_id": video["video_id"], "type": "heart"})
-            myvideo["heart_by_me"] = bool(dbs.likes.find_one({"video_id": video["video_id"], "type": "heart", "username": payload['id']}))
-            myvideo["favorite_by_me"] = bool(dbs.likes.find_one({"video_id": video["video_id"], "type": "favorite", "username": payload['id']}))
-            print(myvideo["count_heart"],myvideo["heart_by_me"],myvideo["favorite_by_me"])
-            video_list.append(myvideo)
-        return jsonify({'msg': '선택!', 'video': video_list})
-    except (jwt.ExpiredSignatureError, jwt.exceptions.DecodeError):
-        return redirect(url_for("home"))
-
-
+# 좋아요, 즐겨찾기
 @app.route('/update_like', methods=['POST'])
 def update_like():
     token_receive = request.cookies.get('mytoken')
@@ -165,6 +146,33 @@ def update_like():
         return jsonify({"result": "success", 'msg': 'updated', "count": count})
     except (jwt.ExpiredSignatureError, jwt.exceptions.DecodeError):
         return redirect(url_for("home"))
+
+
+# 즐겨찾기 영상 리스트
+@app.route("/favorite/post", methods=["POST"])
+def post_fa():
+    token_receive = request.cookies.get('mytoken')
+    # 여러개 찾기 - 예시 ( _id 값은 제외하고 출력)
+    video_list =[]
+    try:
+        payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
+        videos = list(dbs.likes.find({"type": "favorite", "username": payload['id']}))
+        for video in videos:
+            ID = ObjectId(video['video_id'])
+            myvideo = dbs.youtube.find_one({"_id":ID},{'_id':False})
+            myvideo['video_id'] = video['video_id']
+            myvideo["count_heart"] = dbs.likes.count_documents({"video_id": video["video_id"], "type": "heart"})
+            myvideo["heart_by_me"] = bool(dbs.likes.find_one({"video_id": video["video_id"], "type": "heart", "username": payload['id']}))
+            myvideo["favorite_by_me"] = bool(dbs.likes.find_one({"video_id": video["video_id"], "type": "favorite", "username": payload['id']}))
+            print(myvideo["count_heart"],myvideo["heart_by_me"],myvideo["favorite_by_me"])
+            video_list.append(myvideo)
+        return jsonify({'msg': '선택!', 'video': video_list})
+    except (jwt.ExpiredSignatureError, jwt.exceptions.DecodeError):
+        return redirect(url_for("favorite"))
+
+
+
+#############################################
 
 if __name__ == '__main__':
     app.run('0.0.0.0', port=5000, debug=True)

@@ -1,37 +1,137 @@
-
-.navbar {
-    margin-bottom: 50px;
+/*전체*/
+*{
+    font-family: 'Black Han Sans';
 }
 
-.navbar-brand {
+/*nav*/
+header {
+    /* for sticky header */
+    position: fixed;
+    top: 0;
+
+    width: 100%;
+
+    z-index: 2000;
+    background-color: #fff;
+    box-shadow: 0 2px 2px rgba(0, 0, 0, 0.05), 0 1px 0 rgba(0, 0, 0, 0.05);
 }
 
-.card {
-    margin: 20px auto 0px auto;
+/*wrap 하위*/
+.wrap {
+    position: relative;
+    margin-top: 200px;
+    width: 100%;
+
+    /*display: flex;*/
+    /*justify-content: center;*/
+}
+
+/* aside */
+aside {
+    position: fixed;
+    top: 140px;
+    bottom: 0px;
     width: 25%;
-    max-width: 1200px;
-}
 
-.menu {
-    display: block;
-    float : left;
-    width: 150px;
+    padding: 0px 40px;
 }
 
 .menu-title {
     display: flex;
-    flex-direction: column;
+    flex-display: column;
     justify-content: center;
     align-items: center;
 }
 
-.menu-list > li {
-    padding: 5px
+/* 사람 버튼 css */
+.human-wrap {
+    position: relative;
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
 }
 
-.content {
+.human-img {
+    width: 100%;
+    height: 100%;
+
 }
 
-.card-title{
-    font-size : 15px;
+.human-btns {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+.human-btn{
+    position: absolute;
+
+    background-color: transparent;
+
+    border: 1.5px solid #12161d;
+    border-radius: 10px;
+
+    cursor: pointer;
+    transition: 1s;
+}
+.human-btn:hover{
+    background-color: black;
+    color: white;
+}
+
+.btn1 {
+    top: 7%;
+    left: 45%;
+}
+.btn2 {
+    top: 18%;
+    left: 53%;
+}
+.btn3 {
+    top: 30%;
+    left: 65%;
+}
+.btn4 {
+    top: 20%;
+    left: 30%;
+}
+.btn5 {
+    top: 40%;
+    left: 28%;
+}
+.btn6 {
+    top: 45%;
+    left: 55%;
+}
+.btn7 {
+    top: 55%;
+    left: 60%;
+}
+.btn8 {
+    top: 65%;
+    left: 25%;
+}
+.btn9 {
+    top: 75%;
+    left: 60%;
+}
+
+/*section*/
+section {
+    float: right;
+    width: 75%;
+
+    /*border: 1px blue solid;*/
+}
+
+/*card*/
+.card {
+    margin: 10px;
+    width: 25%;
+    max-width: 1200px;
+    outline-color: #20c997;
 }
