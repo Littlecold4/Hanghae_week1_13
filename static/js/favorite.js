@@ -5,9 +5,6 @@ $(document).ready(function () {
 //버튼 색 변화
 function switch_btn(num){
     let btn_num = 'btn'+num
-    // let $a_like = $(`#${btn_num}`)
-    // console.log($a_like)
-    // console.log(btn_num)
     let a= "human-btn "+btn_num
     if(document.getElementById(btn_num).className==a) {
         console.log(num)
@@ -31,8 +28,6 @@ function toggle_like_fa(video_id, type) {
     let $a_like = $(`#${video_id} a[aria-label='heart']`)
     let $i_like = $a_like.find("i")
     console.log($i_like)
-
-    // console.log($a_like)
     if ($i_like.hasClass("fa-heart-o")) {
         $.ajax({
             type: "POST",
@@ -70,11 +65,8 @@ function toggle_like_fa(video_id, type) {
 
 //즐겨찾기 삭제
 function delete_favorite(video_id, type) {
-    // console.log(video_id, type)
     let $a_like = $(`#${video_id} a[aria-label='favorite']`)
     let $i_like = $a_like.find("i")
-
-    // console.log($i_like)
     $.ajax({
         type: "POST",
         url: "/update_like",
@@ -84,9 +76,8 @@ function delete_favorite(video_id, type) {
             action_give: "unlike"
         },
         success: function (response) {
-            // console.log("favorite")
             $i_like.addClass("fa-star-o").removeClass("fa-star")
-            alert('영상 저장 취소 완료!')
+            alert('영상 저장 취소!')
         }
     })
     window.location.reload()

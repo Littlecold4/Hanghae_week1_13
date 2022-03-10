@@ -33,8 +33,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
     <link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Hi+Melody&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap" rel="stylesheet">
+
 
     <!-- favorite.js 연결 -->
     <script>
@@ -46,36 +45,27 @@
 <body>
 <!-- Header -->
 <header>
-    <!-- 네비게이션 영역 -->
     <nav class="navbar is-primary" role="navigation" aria-label="main navigation">
-        <!-- 로고&타이틀 -->
-        <div class="navbar-brand">
-            <img src="{{ url_for('static', filename='img/logo.png') }}" alt="웹 로고" width="150" , height="15"
-                 onclick="window.location.href='/'"
-                 style="cursor: pointer">
-            <h1 onclick="window.location.href='/'" style="cursor: pointer; font-size: 3.5rem">내 몸 처방전<br>&nbsp;&nbsp; MY
-                PAGE
-            </h1>
+
+        <div class="nav-btn">
+            <button onclick="sign_out()">Log Out</button>
+            |
+            <button onclick="window.location.href='/'">MAIN PAGE</button>
         </div>
-        <!-- 로그아웃, 마이페이지 버튼-->
-        <div class="navbar-end">
-            <div class="navbar-item">
-                <div class="buttons">
-                    <a class="button is-light">
-                        <strong onclick="sign_out()">log out</strong>
-                    </a>
-                    <a class="button is-light" href="/">MAIN PAGE</a>
-                </div>
+
+        <div class="nav-logo">
+            <div class="img-box">
+                <img src="{{ url_for('static', filename='img/main_logo.png') }}" alt="웹 로고">
             </div>
         </div>
+        <h1 class="mypage">MY PAGE</h1>
     </nav>
 </header>
 
 <div class="wrap">
     <!-- 메뉴 영역 -->
     <aside>
-        <h6 class="menu-title">부위별 영상</h6>
-        <div class="human-wrap">
+        <div class="human-wrap" style="margin-top: 45px">
             <!-- 인체 이미지 -->
             <img class="human-img" src="{{ url_for('static', filename='img/human.png') }}" alt="">
             <!-- 부위별 영상 버튼 -->
@@ -94,7 +84,6 @@
     </aside>
     <!-- 부위별 영상 리스트 -->
     <section class="content">
-        <div id="list" class="row row-cols-1 row-cols-md-4 g-4"></div>
         {% for result in results %}
             <div class="card" id="{{ result.video_id }}"
                  style="max-width: 15rem; outline: #20c997 10px; display:inline-block; position:relative">

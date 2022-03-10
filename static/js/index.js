@@ -1,4 +1,3 @@
-
 $(document).ready(function () {
     switch_btn(part_num);
 });
@@ -7,8 +6,6 @@ $(document).ready(function () {
 function toggle_like(video_id, type) {
     let $a_like = $(`#${video_id} a[aria-label='heart']`)
     let $i_like = $a_like.find("i")
-
-    // console.log($a_like)
     if ($i_like.hasClass("fa-heart-o")) {
         $.ajax({
             type: "POST",
@@ -19,7 +16,6 @@ function toggle_like(video_id, type) {
                 action_give: "like"
             },
             success: function (response) {
-                // console.log("like")
                 $i_like.addClass("fa-heart").removeClass("fa-heart-o")
                 $a_like.find("span.like-num").text(response["count"])
             }
@@ -34,7 +30,6 @@ function toggle_like(video_id, type) {
                 action_give: "unlike"
             },
             success: function (response) {
-                // console.log("unlike")
                 $i_like.addClass("fa-heart-o").removeClass("fa-heart")
                 $a_like.find("span.like-num").text(response["count"])
             }
@@ -43,14 +38,12 @@ function toggle_like(video_id, type) {
     }
 
 }
+
 //즐겨찾기
 function toggle_favorite(video_id, type) {
-    // console.log(video_id, type)
     let $a_like = $(`#${video_id} a[aria-label='favorite']`)
     let $i_like = $a_like.find("i")
     console.log($i_like)
-
-    // console.log($i_like)
     if ($i_like.hasClass("fa-star-o")) {
         $.ajax({
             type: "POST",
@@ -61,7 +54,6 @@ function toggle_favorite(video_id, type) {
                 action_give: "like"
             },
             success: function (response) {
-                // console.log("favorite")
                 alert(response['msg'])
                 $i_like.addClass("fa-star").removeClass("fa-star-o")
                 $a_like.find("span.like-num").text(response["count"])
@@ -78,7 +70,6 @@ function toggle_favorite(video_id, type) {
             },
             success: function (response) {
                 alert(response['msg'])
-                // console.log("unfavorite")
                 $i_like.addClass("fa-star-o").removeClass("fa-star")
                 $a_like.find("span.like-num").text(response["count"])
             }
@@ -109,7 +100,6 @@ function switch_btn(num){   //num =누른 버튼의 번호
         $('#list').empty()
     }
 }
-
 
 // 로그아웃 기능
 function sign_out() {

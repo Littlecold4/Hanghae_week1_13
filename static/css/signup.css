@@ -15,7 +15,7 @@ body {
 /* 컨테이너 영역 */
 .container {
     width: 400px;
-    height: 60%;
+    height: 75%;
     display: flex;
     flex-direction: column;
     justify-content: center;

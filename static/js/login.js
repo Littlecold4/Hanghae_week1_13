@@ -1,17 +1,3 @@
-// {% if msg %}
-//     alert("{{ msg }}")
-// {% endif %}
-
-
-function toggle_sign_up() {
-    $("#sign-up-box").toggleClass("is-hidden")
-    $("#div-sign-in-or-up").toggleClass("is-hidden")
-    $("#btn-check-dup").toggleClass("is-hidden")
-    $("#help-id").toggleClass("is-hidden")
-    $("#help-password").toggleClass("is-hidden")
-    $("#help-password2").toggleClass("is-hidden")
-}
-
 // 로그인
 function sign_in() {
     let username = $("#input-username").val()
@@ -59,8 +45,6 @@ function sign_up() {
     let username = $("#input-username").val()
     let password = $("#input-password").val()
     let password2 = $("#input-password2").val()
-    console.log(username, password, password2)
-
     // 아이디 중복검사 끝났는 지 확인
     if ($("#help-id").hasClass("is-danger")) {
         alert("아이디를 다시 확인해주세요.")

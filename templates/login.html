@@ -19,6 +19,11 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
 
         <!-- JS Link -->
+        <script>
+             {% if msg %}
+                alert("{{ msg }}")
+            {% endif %}
+        </script>
         <script src="{{ url_for('static', filename='js/login.js') }}"></script>
 
     </head>

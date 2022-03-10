@@ -94,7 +94,7 @@ function sign_up() {
             password_give: password
         },
         success: function (response) {
-            alert("회원가입을 축하드립니다!")
+            alert(response['msg'])
             window.location.replace("/login")
         }
     });

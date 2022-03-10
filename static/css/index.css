@@ -2,15 +2,11 @@
     font-family: 'Black Han Sans';
 }
 
-.navbar {
-    background-color: #20c997;
-}
-
 body {
     margin: 0;
 }
 
-/*nav*/
+/*header*/
 header {
     /* for sticky header */
     position: fixed;
@@ -19,17 +15,47 @@ header {
     width: 100%;
 
     z-index: 2000;
-    background-color: #fff;
+
     box-shadow: 0 2px 2px rgba(0, 0, 0, 0.05), 0 1px 0 rgba(0, 0, 0, 0.05);
+
+}
+
+.navbar{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    position: relative;
+}
+
+.nav-btn {
+    position: absolute;
+    right: 8px;
+    top: 8px;
+}
+
+.nav-btn button {
+    background-color: white;
+    border-radius: 10px;
+    border: none;
+    margin-left: 5px;
+}
+
+.nav-logo h1 {
+    margin-top: 25px;
+    margin-left: 50px;
+}
+
+.nav-btn button:hover {
+    background-color: lightgray
 }
 
 .wrap {
     position: relative;
-    margin-top: 200px;
+    margin-top: 150px;
     width: 100%;
 
-    /*display: flex;*/
-    /*justify-content: center;*/
 }
 
 /* aside */
@@ -167,6 +193,9 @@ section {
     background-attachment: fixed;
     clear: both;
 }
+.img-box{
+    width:200px;
+}
 
 .menu-title {
     display: flex;
@@ -186,6 +215,3 @@ section {
 /*    padding-right: 20px;*/
 
 /*}*/
-
-
-
