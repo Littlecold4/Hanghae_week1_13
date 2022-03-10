@@ -144,7 +144,7 @@ function posting(num) {
                                   <img src="${img}" class="mypic">
                                   <div class="card-body">
                                     <h4 class="card-title">${title}</h4>
-                                    <a href="http://www.youtube.com${url}">보러가기</a>
+                                    <a href="http://www.youtube.com${url}" target="_blank">보러가기</a>
                                   </div>
                                       <nav class="level is-mobile">
                                             <div class="level-left">
