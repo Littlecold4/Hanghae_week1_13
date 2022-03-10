@@ -47,10 +47,14 @@ def home_menu(keyword):
         print('1')
         video["_id"] = str(video["_id"])
         video["count_heart"] = dbs.likes.count_documents({"video_id": video["_id"], "type": "heart"})
-        video["heart_by_me"] = bool(
-            dbs.likes.find_one({"video_id": video["_id"], "type": "heart", "username": payload['id']}))
-        video["favorite_by_me"] = bool(
-            dbs.likes.find_one({"video_id": video["_id"], "type": "favorite", "username": payload['id']}))
+        if bool(dbs.likes.find_one({"video_id": video["_id"], "type": "heart", "username": payload['id']})) is True:
+            video["heart_by_me"] ='fa-heart'
+        else :
+            video["heart_by_me"] = 'fa-heart-o'
+        if bool( dbs.likes.find_one({"video_id": video["_id"], "type": "favorite", "username": payload['id']})) is True:
+            video["favorite_by_me"] ='fa-star'
+        else :
+            video["favorite_by_me"] = 'fa-star-o'
     return render_template('index.html',word=keyword, results= videos)
 
 #로그인 페이지

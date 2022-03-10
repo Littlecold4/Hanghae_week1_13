@@ -1,5 +1,6 @@
+
 $(document).ready(function () {
-    switch_btn(num);
+    switch_btn(part_num);
 });
 
 
@@ -87,14 +88,8 @@ function toggle_favorite(video_id, type) {
 }
 
 
-function remove() {
-    $('#list').empty()
-}
-function post(num){
-    window.location.href=`/${num}`
-}
+
 function switch_btn(num){
-    num=1
     let btn_num = 'btn'+num
     // let $a_like = $(`#${btn_num}`)
     // console.log($a_like)

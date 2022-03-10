@@ -29,11 +29,14 @@
 
 
     <title>내 몸 처방전</title>
-    <script type=" text/javascript" src="../static/js/index.js"></script>
 
     <link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap" rel="stylesheet">
 
 
+    <script>
+         let part_num ='{{ word }}'
+    </script>
+    <script type=" text/javascript" src="../static/js/index.js"></script>
 </head>
 
 <body>
@@ -73,7 +76,7 @@
             <img class="human-img" src="{{ url_for('static', filename='img/human.png') }}" alt="">
 
             <div class="human-btns">
-                <button class="human-btn btn1" id="btn1" onclick="post(1)">머리</button>
+                <button class="human-btn btn1" id="btn1" onclick="window.location.href='/1'">머리</button>
                 <button class="human-btn btn2" id="btn2" onclick="window.location.href='/2'">목</button>
                 <button class="human-btn btn3" id="btn3" onclick="window.location.href='/3'">등</button>
                 <button class="human-btn btn4" id="btn4" onclick="window.location.href='/4'">어깨</button>
@@ -91,8 +94,8 @@
 
 
         {% for result in results %}
-        <div class="card" id="{{ result._id }}" style="max-width: 15rem; outline: #20c997 10px">
-            <div class="card-header">${name}</div>
+        <div class="card" id="{{ result._id }}" style="max-width: 15rem; outline: #20c997 10px; display:inline-block">
+            <div class="card-header">{{ result.name }}</div>
             <img src="{{ result.img }}" class="mypic">
             <div class="card-body">
                 <h4 class="card-title">{{ result.title }}</h4>
@@ -106,7 +109,7 @@
                                                        style="color: red"></i></span>&nbsp;<span class="like-num">{{ result.count_heart }}</span></a>
                         <a style="text-decoration:none " class="level-item is-sparta" aria-label="favorite"
                            onclick="toggle_favorite('{{ result._id }}','favorite')">
-                            <span class="icon is-small"><i class="fa{{result.favorite_by_me}}" aria-hidden="true"
+                            <span class="icon is-small"><i class="fa {{result.favorite_by_me}}" aria-hidden="true"
                                                            style="color: yellow"></i></span>&nbsp;</a>
                 </div>
             </nav>
