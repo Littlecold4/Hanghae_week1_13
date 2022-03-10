@@ -1,63 +1,63 @@
 <!doctype html>
 <html lang="en">
-<head>
+    <head>
+        <!-- Webpage Title -->
+        <title>Log In | 내 몸 처방전</title>
 
-    <!-- Webpage Title -->
-    <title>Log In | 내 몸 처방전</title>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
 
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <!-- Font Link -->
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&display=swap" rel="stylesheet">
 
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&display=swap" rel="stylesheet">
+        <!-- CSS Link -->
+        <link href="{{ url_for('static', filename='css/login.css') }}" rel="stylesheet">
 
-    <!-- Bulma CSS -->
-    {#    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">#}
-    <!-- Font Awesome CSS -->
-    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-    <!-- CSS Link -->
-    <link href="{{ url_for('static', filename='css/login.css') }}" rel="stylesheet">
-    <!-- JS -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
-    <!-- JS Link -->
-    <script src="{{ url_for('static', filename='js/login.js') }}"></script>
+        <!-- JS -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
 
-</head>
-<body>
-<button onclick="window.location.href='/index'"></button>
-<div class="container">
-    <div class="img-box">
-        <img src="{{ url_for('static', filename='img/logo.png') }}" alt="웹 로고">
-    </div>
+        <!-- JS Link -->
+        <script src="{{ url_for('static', filename='js/login.js') }}"></script>
 
-    <div class="login-box">
-        <div class="int-area">
-            <input id="input-username" type="text" aria-label="아이디" required>
-            <label class="text-id">ID</label>
+    </head>
+    <body>
+        <div class="container">
+
+            <div class="img-box">
+                <img src="{{ url_for('static', filename='img/logo.png') }}" alt="웹 로고">
+            </div>
+
+            <div class="login-box">
+                <div class="int-area">
+                    <input id="input-username" type="text" aria-label="아이디" required>
+                    <label class="text-id">ID</label>
+                </div>
+                <p id="help-id-login" class="help is-danger"></p>
+
+                <div class="int-area">
+                    <input id="input-password" type="password" aria-label="비밀번호" required>
+                    <label class="text-pw">PASSWORD</label>
+                </div>
+                <p id="help-password-login" class="help is-danger"></p>
+
+                <div class="btn-area">
+                    <input class="sign-in-btn" onclick="sign_in()" type="submit" value="로그인">
+                </div>
+
+                <div class="division-line">
+                    <div class="line"></div>
+                    <div class="or">또는</div>
+                    <div class="line"></div>
+                </div>
+            </div>
+
+            <div class="signup-box">
+                <div>계정이 없으신가요?</div>
+                <a href={{ url_for('signup') }}>가입하기</a>
+            </div>
+
         </div>
-        <p id="help-id-login" class="help is-danger"></p>
-
-        <div class="int-area">
-            <input id="input-password" type="password" aria-label="비밀번호" required>
-            <label class="text-pw">PASSWORD</label>
-        </div>
-        <p id="help-password-login" class="help is-danger"></p>
-
-        <div class="btn-area">
-            <input onclick="sign_in()" type="submit" value="로그인">
-        </div>
-    </div>
-    <div class="division-line">
-        <div class="line"></div>
-        <div class="or">또는</div>
-        <div class="line"></div>
-    </div>
-
-    <div class="signup-box">
-        <div>계정이 없으신가요?</div>
-        <a href={{ url_for('signup') }}>가입하기</a>
-    </div>
-</div>
-</body>
+    </body>
 </html>

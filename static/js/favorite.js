@@ -1,76 +1,9 @@
 $(document).ready(function () {
 });
 
-function delete_favorite(video_id, type) {
-    // console.log(video_id, type)
-    let $a_like = $(`#${video_id} a[aria-label='favorite']`)
-    let $i_like = $a_like.find("i")
-
-    // console.log($i_like)
-
-    $.ajax({
-        type: "POST",
-        url: "/update_like",
-        data: {
-            video_id_give: video_id,
-            type_give: type,
-            action_give: "unlike"
-        },
-        success: function (response) {
-            // console.log("favorite")
-            $i_like.addClass("fa-star-o").removeClass("fa-star")
-        }
-    })
-    window.location.reload()
-
-}
-
-function toggle_like_fa(video_id, type) {
-    let $a_like = $(`#${video_id} a[aria-label='heart']`)
-    let $i_like = $a_like.find("i")
-    console.log($i_like)
-
-    // console.log($a_like)
-    if ($i_like.hasClass("fa-heart-o")) {
-        $.ajax({
-            type: "POST",
-            url: "/update_like",
-            data: {
-                video_id_give: video_id,
-                type_give: type,
-                action_give: "like"
-            },
-            success: function (response) {
-                console.log("like")
-                $i_like.addClass("fa-heart").removeClass("fa-heart-o")
-                $a_like.find("span.like-num").text(response["count"])
-            }
-        })
-    } else {
-        $.ajax({
-            type: "POST",
-            url: "/update_like",
-            data: {
-                video_id_give: video_id,
-                type_give: type,
-                action_give: "unlike"
-            },
-            success: function (response) {
-                console.log("unlike")
-                $i_like.addClass("fa-heart-o").removeClass("fa-heart")
-                $a_like.find("span.like-num").text(response["count"])
-            }
-        })
-
-    }
-}
-//
-// function  log_out(){
-//
-// }
-
-function post_fa(num) {
-    $('#cards-box').empty()
+//부위별 즐겨찾기 영상 리스트
+function posting_fa(num) {
+    $('#list').empty()
     $.ajax({
         type: 'POST',
         url: '/favorite/post',
@@ -111,8 +44,8 @@ function post_fa(num) {
                                   <div class="card-body">
                                     <p class="card-title">${title}</p>
                                     <p class="card-text">Go for show</p>
-                                    <a href="http://www.youtube.com${url}">보러가기</a>
-                                  </div>
+                                    <a href="http://www.youtube.com${url}" target="_blank">보러가기</a>
+                                    </div>
                                       <nav class="level is-mobile">
                                             <div class="level-left">
                                                 <a class="level-item is-sparta" aria-label="heart" onclick="toggle_like_fa('${row["video_id"]}','heart')">
@@ -124,15 +57,84 @@ function post_fa(num) {
                                     </nav>
                                 </div>`
 
-                    $('#cards-box').append(temp_html)
+                    $('#list').append(temp_html)
                 }
             }
         }
     });
 }
 
-function sign_out() {
-            $.removeCookie('mytoken', {path: '/'});
-            alert('로그아웃!')
-            window.location.href = "/login"
+
+// 좋아요, 즐겨찾기 버튼 클릭
+function toggle_like_fa(video_id, type) {
+    let $a_like = $(`#${video_id} a[aria-label='heart']`)
+    let $i_like = $a_like.find("i")
+    console.log($i_like)
+
+    // console.log($a_like)
+    if ($i_like.hasClass("fa-heart-o")) {
+        $.ajax({
+            type: "POST",
+            url: "/update_like",
+            data: {
+                video_id_give: video_id,
+                type_give: type,
+                action_give: "like"
+            },
+            success: function (response) {
+                console.log("like")
+                $i_like.addClass("fa-heart").removeClass("fa-heart-o")
+                $a_like.find("span.like-num").text(response["count"])
+            }
+        })
+    } else {
+        $.ajax({
+            type: "POST",
+            url: "/update_like",
+            data: {
+                video_id_give: video_id,
+                type_give: type,
+                action_give: "unlike"
+            },
+            success: function (response) {
+                console.log("unlike")
+                $i_like.addClass("fa-heart-o").removeClass("fa-heart")
+                $a_like.find("span.like-num").text(response["count"])
+            }
+        })
+
+    }
+}
+
+
+//즐겨찾기 삭제
+function delete_favorite(video_id, type) {
+    // console.log(video_id, type)
+    let $a_like = $(`#${video_id} a[aria-label='favorite']`)
+    let $i_like = $a_like.find("i")
+
+    // console.log($i_like)
+    $.ajax({
+        type: "POST",
+        url: "/update_like",
+        data: {
+            video_id_give: video_id,
+            type_give: type,
+            action_give: "unlike"
+        },
+        success: function (response) {
+            // console.log("favorite")
+            $i_like.addClass("fa-star-o").removeClass("fa-star")
+            alert('영상 저장 취소 완료!')
         }
+    })
+    window.location.reload()
+}
+
+
+//로그아웃
+function sign_out() {
+    $.removeCookie('mytoken', {path: '/'});
+    alert('로그아웃!')
+    window.location.href = "/login"
+}

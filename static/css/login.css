@@ -25,17 +25,14 @@ body {
     border-radius: 10px;
     background-color: white;
     box-shadow: 0 20px 20px rgba(0, 0, 0, 0.2), 0px 0px 50px rgba(0, 0, 0, 0.2);
-
     position: relative;
 }
-
-/* 컨테이너 영역 끝 */
 
 /* 이미지 영역 */
 
 .img-box {
     width: 80%;
-    height: 25%;
+    height: 35%;
     padding-top: 40px;
     display: flex;
     justify-content: center;
@@ -46,14 +43,12 @@ body {
     width: 250px;
 }
 
-/* 이미지 영역 끝 */
-
 /* 로그인 영역 */
 
 .login-box {
     width: 80%;
     height: 45%;
-    padding-top: 20px;
+    padding-top: 10px;
     display: flex;
     justify-content: center;
     flex-direction: column;
@@ -75,7 +70,7 @@ body {
 }
 
 .int-area > input:hover {
-    border: 1px gray solid;
+    border: 1px black solid;
 }
 
 .int-area > label {
@@ -96,13 +91,7 @@ body {
     margin-top: 10px;
 }
 
-
-
-.btn-area {
-    width: 100%;
-}
-
-.btn-area > input {
+.sign-in-btn {
     margin-top: 20px;
     background-color: rgb(140, 221, 248);
     color: white;
@@ -114,19 +103,34 @@ body {
     width: 100%;
 }
 
-.btn-area > input:hover {
+.sign-in-btn:hover {
     background-color: rgb(74, 201, 243);
 }
 
-/* 로그인 영역 끝 */
+.division-line {
+    margin-top: 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.division-line > .line {
+    width: 120px;
+    height: 1px;
+    background-color: rgb(173, 173, 173, .4);
+}
+
+.division-line > .or {
+    font-weight: bold;
+    color: rgb(94, 93, 93);
+}
 
 /* 회원가입 페이지 이동 영역 */
 
 .signup-box {
-    padding-top: 35px;
+    padding-bottom: 10px;
     width: 80%;
     height: 20%;
-    /* border: 1px rgb(165, 59, 103) solid; */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -146,29 +150,7 @@ body {
     color: rgb(7, 171, 247);
 }
 
-/* 회원가입 페이지 이동 영역 끝 */
-
-/* 구분선 */
-
-.division-line {
-    position: absolute;
-    bottom: 110px;
-    width: 80%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.division-line > .line {
-    width: 120px;
-    height: 1px;
-    background-color: rgb(173, 173, 173, .4);
-}
-
-.division-line > .or {
-    font-weight: bold;
-    color: rgb(94, 93, 93);
-}
+/* p element css property */
 
 .is-success {
     font-size: 0.8rem;

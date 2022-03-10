@@ -47,7 +47,6 @@ body {
     width: 80%;
     height: 75%;
     padding-top: 70px;
-    /* border: 1px rgb(33, 110, 87) solid; */
 }
 
 .int-area {
@@ -79,18 +78,6 @@ body {
 
 .int-area > input:hover {
     border: 1px gray solid;
-}
-
-.int-area > label {
-    position: absolute;
-    top: 19px;
-    left: 10px;
-    color: dimgray;
-}
-
-.int-area > input:focus + label,
-.int-area > input:valid + label {
-    display: none;
 }
 
 .signup-btn {
@@ -129,6 +116,8 @@ body {
 .return > a:hover {
     color: rgb(7, 171, 247);
 }
+
+/* p element css property */
 
 .is-success {
     font-size: 0.8rem;
