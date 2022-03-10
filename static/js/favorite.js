@@ -3,6 +3,21 @@ $(document).ready(function () {
 
 //부위별 즐겨찾기 영상 리스트
 function posting_fa(num) {
+     let btn_num = 'btn'+num
+    // let $a_like = $(`#${btn_num}`)
+    // console.log($a_like)
+    // console.log(btn_num)
+    let a= "human-btn "+btn_num
+    if(document.getElementById(btn_num).className==a) {
+        console.log(num)
+        document.getElementById(btn_num).className = 'human-btn-click ' + btn_num
+        for (let i = 1; i <= 9; i++) {
+            if (i != num) {
+                let btn_num = 'btn' + i
+                let a = 'human-btn ' + 'btn' + i
+                document.getElementById(btn_num).className = a
+            }
+        }
     $('#list').empty()
     $.ajax({
         type: 'POST',
@@ -48,9 +63,9 @@ function posting_fa(num) {
                                     </div>
                                       <nav class="level is-mobile">
                                             <div class="level-left">
-                                                <a class="level-item is-sparta" aria-label="heart" onclick="toggle_like_fa('${row["video_id"]}','heart')">
+                                                <a style="text-decoration:none " class="level-item is-sparta" aria-label="heart" onclick="toggle_like_fa('${row["video_id"]}','heart')">
                                                     <span class="icon is-small"><i class="fa ${class_heart}" aria-hidden="true" style="color: red"></i></span>&nbsp;<span class="like-num">${count}</span>
-                                                <a class="level-item is-sparta" aria-label="favorite" onclick="delete_favorite('${row["video_id"]}','favorite')">
+                                                <a style="text-decoration:none " class="level-item is-sparta" aria-label="favorite" onclick="delete_favorite('${row["video_id"]}','favorite')">
                                                     <span class="icon is-small"><i class="fa ${class_favorite}" aria-hidden="true" style="color: yellow"></i></span>&nbsp;
                                                 </a>
                                             </div>
@@ -62,6 +77,10 @@ function posting_fa(num) {
             }
         }
     });
+}else{
+        document.getElementById(btn_num).className = 'human-btn '+btn_num
+        $('#list').empty()
+    }
 }
 
 

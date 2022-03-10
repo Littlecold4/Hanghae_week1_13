@@ -1,6 +1,13 @@
-/*전체*/
-*{
+* {
     font-family: 'Black Han Sans';
+}
+
+.navbar {
+    background-color: #20c997;
+}
+
+body {
+    margin: 0;
 }
 
 /*nav*/
@@ -16,7 +23,6 @@ header {
     box-shadow: 0 2px 2px rgba(0, 0, 0, 0.05), 0 1px 0 rgba(0, 0, 0, 0.05);
 }
 
-/*wrap 하위*/
 .wrap {
     position: relative;
     margin-top: 200px;
@@ -36,11 +42,12 @@ aside {
     padding: 0px 40px;
 }
 
-.menu-title {
-    display: flex;
-    flex-display: column;
-    justify-content: center;
-    align-items: center;
+/*section*/
+section {
+    float: right;
+    width: 75%;
+
+    /*border: 1px blue solid;*/
 }
 
 /* 사람 버튼 css */
@@ -67,18 +74,31 @@ aside {
     height: 100%;
 }
 
-.human-btn{
+.human-btn {
     position: absolute;
 
     background-color: transparent;
 
-    border: 1.5px solid #12161d;
+    border: 3px solid #12161d;
     border-radius: 10px;
 
     cursor: pointer;
     transition: 1s;
 }
-.human-btn:hover{
+.human-btn-click {
+    position: absolute;
+
+    background-color: transparent;
+    color: #20c997;
+
+    border: 3px solid #20c997;
+    border-radius: 10px;
+
+    cursor: pointer;
+    transition: 1s;
+}
+
+.human-btn:hover {
     background-color: black;
     color: white;
 }
@@ -87,51 +107,85 @@ aside {
     top: 7%;
     left: 45%;
 }
+
 .btn2 {
     top: 18%;
     left: 53%;
 }
+
 .btn3 {
     top: 30%;
     left: 65%;
 }
+
 .btn4 {
     top: 20%;
     left: 30%;
 }
+
 .btn5 {
     top: 40%;
     left: 28%;
 }
+
 .btn6 {
     top: 45%;
     left: 55%;
 }
+
 .btn7 {
     top: 55%;
     left: 60%;
 }
+
 .btn8 {
     top: 65%;
     left: 25%;
 }
+
 .btn9 {
     top: 75%;
     left: 60%;
 }
 
-/*section*/
-section {
-    float: right;
-    width: 75%;
-
-    /*border: 1px blue solid;*/
-}
-
-/*card*/
 .card {
-    margin: 10px;
+    margin: 20px;
     width: 25%;
+    height: 400px;
     max-width: 1200px;
     outline-color: #20c997;
 }
+
+.content {
+    width: 1200px;
+    height: 2300px;
+    padding-left: 20px;
+    padding-top: 20px;
+    background-image: linear-gradient(0deg, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0)), url('/static/img/img1.png');
+    background-position: center;
+    background-size:300px 300px;
+    background-attachment: fixed;
+    clear: both;
+}
+
+.menu-title {
+    display: flex;
+    flex-display: column;
+    justify-content: center;
+    align-items: center;
+}
+
+/*.content {*/
+/*    width: 1200px;*/
+/*    height: 3000px;*/
+/*    !*background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/static/img/logo.png');*!*/
+/*    !*background-position: center;*!*/
+/*    !*background-size: cover;*!*/
+/*    padding-bottom: 20px;*/
+/*    padding-left: 20px;*/
+/*    padding-right: 20px;*/
+
+/*}*/
+
+
+

@@ -60,6 +60,7 @@ function toggle_favorite(video_id, type) {
             },
             success: function (response) {
                 // console.log("favorite")
+                alert(response['msg'])
                 $i_like.addClass("fa-star").removeClass("fa-star-o")
                 $a_like.find("span.like-num").text(response["count"])
             }
@@ -74,6 +75,7 @@ function toggle_favorite(video_id, type) {
                 action_give: "unlike"
             },
             success: function (response) {
+                alert(response['msg'])
                 // console.log("unfavorite")
                 $i_like.addClass("fa-star-o").removeClass("fa-star")
                 $a_like.find("span.like-num").text(response["count"])

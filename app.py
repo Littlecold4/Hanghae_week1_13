@@ -140,10 +140,12 @@ def update_like():
         }
         if action_receive == "like":
             dbs.likes.insert_one(doc)
+            msg ="즐겨찾기 추가!"
         else:
             dbs.likes.delete_one(doc)
+            msg = '즐겨찾기 삭제!'
         count = dbs.likes.count_documents({"video_id": video_id_receive, "type": type_receive})
-        return jsonify({"result": "success", 'msg': 'updated', "count": count})
+        return jsonify({"result": "success", 'msg': msg, "count": count})
     except (jwt.ExpiredSignatureError, jwt.exceptions.DecodeError):
         return redirect(url_for("home"))
 
