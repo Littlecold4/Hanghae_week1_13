@@ -1,4 +1,5 @@
 $(document).ready(function () {
+    switch_btn(num);
 });
 
 
@@ -88,6 +89,31 @@ function toggle_favorite(video_id, type) {
 
 function remove() {
     $('#list').empty()
+}
+function post(num){
+    window.location.href=`/${num}`
+}
+function switch_btn(num){
+    num=1
+    let btn_num = 'btn'+num
+    // let $a_like = $(`#${btn_num}`)
+    // console.log($a_like)
+    // console.log(btn_num)
+    let a= "human-btn "+btn_num
+    if(document.getElementById(btn_num).className==a) {
+        console.log(num)
+        document.getElementById(btn_num).className = 'human-btn-click ' + btn_num
+        for(let i=1; i<=9;i++){
+            if(i !=num){
+                let btn_num = 'btn'+i
+                let a ='human-btn ' +'btn'+i
+                document.getElementById(btn_num).className =a
+            }
+        }
+        }else{
+        document.getElementById(btn_num).className = 'human-btn '+btn_num
+        $('#list').empty()
+    }
 }
 
 

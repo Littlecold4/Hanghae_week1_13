@@ -37,6 +37,21 @@ def home():
     except jwt.exceptions.DecodeError:
         return redirect(url_for("login", msg="로그인 정보가 존재하지 않습니다."))
 
+@app.route('/<keyword>')
+def home_menu(keyword):
+    token_receive = request.cookies.get('mytoken')
+    payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
+    videos = list(dbs.youtube.find({'num': int(keyword)}, {}))
+    print(videos)
+    for video in videos:
+        print('1')
+        video["_id"] = str(video["_id"])
+        video["count_heart"] = dbs.likes.count_documents({"video_id": video["_id"], "type": "heart"})
+        video["heart_by_me"] = bool(
+            dbs.likes.find_one({"video_id": video["_id"], "type": "heart", "username": payload['id']}))
+        video["favorite_by_me"] = bool(
+            dbs.likes.find_one({"video_id": video["_id"], "type": "favorite", "username": payload['id']}))
+    return render_template('index.html',word=keyword, results= videos)
 
 #로그인 페이지
 @app.route('/login')
