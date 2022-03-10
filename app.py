@@ -11,10 +11,10 @@ clients = MongoClient(
 dbs = clients.dbsparta
 
 app = Flask(__name__)
-app.config["TEMPLATES_AUTO_RELOAD"] = True
+app.config["TEMPLATES_AUTO_RELOADcd "] = True
 app.config['UPLOAD_FOLDER'] = "./static/profile_pics"
 
-SECRET_KEY = 'secret'
+SECRET_KEY = 'SECRET'
 
 
 # 랜딩 페이지

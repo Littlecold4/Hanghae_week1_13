@@ -78,9 +78,9 @@ function delete_favorite(video_id, type) {
         success: function (response) {
             $i_like.addClass("fa-star-o").removeClass("fa-star")
             alert('영상 저장 취소!')
+            window.location.reload()
         }
     })
-    window.location.reload()
 }
 
 
